@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import './css/comunes.css'
 import Home from './Routes/Home'
+import Login from './Routes/Login';
 import reportWebVitals from './reportWebVitals';
 import {
   createBrowserRouter,
@@ -14,6 +16,10 @@ const router = createBrowserRouter([
     path: "/",
     element: <Home />,
     // errorElement: <Error />,
+  },
+  {
+    path: "/Login",
+    element: <Login />,
   },
   // {
   //   path: "Posts/:userid",
