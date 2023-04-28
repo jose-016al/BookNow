@@ -14,7 +14,7 @@
             "repo": "github.com/symfony/recipes",
             "branch": "main",
             "version": "2.8",
-            "ref": "6b43b7b6ff6bf2551f2933ebeb66721fa3db8fbc"
+            "ref": "67961f095352f829a24c035639b3d0d3378ffbf2"
         },
         "files": [
             "./config/packages/doctrine.yaml",
@@ -33,6 +33,18 @@
         "files": [
             "./config/packages/doctrine_migrations.yaml",
             "./migrations/.gitignore"
+        ]
+    },
+    "nelmio/cors-bundle": {
+        "version": "2.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "1.5",
+            "ref": "6bea22e6c564fba3a1391615cada1437d0bde39c"
+        },
+        "files": [
+            "./config/packages/nelmio_cors.yaml"
         ]
     },
     "phpunit/phpunit": {

@@ -1,44 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Header from '../Components/Header';
-import { Link } from 'react-router-dom';
+import { Link, Navigate  } from 'react-router-dom';
 
 const Register = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [termsAccepted, setTermsAccepted] = useState(false);
 
-    const handleUsernameChange = (event) => {
-        setUsername(event.target.value);
-    };
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [isRegistered, setIsRegistered] = useState(false);
 
-    const handlePasswordChange = (event) => {
-        setPassword(event.target.value);
-    };
-
-    const handleTermsAcceptedChange = (event) => {
-        setTermsAccepted(event.target.checked);
-    };
-
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-
-        if (!termsAccepted) {
-            alert('Debe aceptar los términos y condiciones para registrarse');
-            return;
-        }
-
-        axios.post('http://localhost:8000/register', {
-            username: username,
-            plainPassword: password,
-        })
-            .then(response => {
-                console.log(response);
-            })
-            .catch(error => {
-                console.log(error);
+        const data = { email, password };
+        try {
+            const response = await axios.post('http://localhost:8000/api/register', JSON.stringify(data), {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             });
-    };
+            console.log(response.data);
+            setIsRegistered(true);
+        } catch (error) {
+            console.error(error.response.data);
+        }
+    }
+
+    if (isRegistered) {
+        return <Navigate to="/Login" replace={true} />;
+    }
 
     return (
         <>
@@ -46,18 +35,14 @@ const Register = () => {
             <div className='container'>
                 <div className='row justify-content-center'>
                     <h2 className='text-center mb-4 mt-4'>Registro</h2>
-                    <form className='col-12 col-md-4' id='containerLogin' onSubmit={handleSubmit}>
+                    <form className='col-12 col-md-4' id='containerLogin' onSubmit={handleSubmit} >
                         <div className="mb-2">
-                            <label className="form-label">Nombre de usuario</label>
-                            <input type="text" className="form-control" value={username} onChange={handleUsernameChange} />
+                            <label className="form-label">Correo electronico</label>
+                            <input type="email" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} />
                         </div>
                         <div className="mb-4">
                             <label className="form-label">Password</label>
-                            <input type="password" className="form-control" value={password} onChange={handlePasswordChange} />
-                        </div>
-                        <div className="mb-4 form-check">
-                            <input type="checkbox" className="form-check-input" id="termsAccepted" checked={termsAccepted} onChange={handleTermsAcceptedChange} />
-                            <label className="form-check-label" htmlFor="termsAccepted">Acepto los términos y condiciones</label>
+                            <input type="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} />
                         </div>
                         <div className="d-grid">
                             <button className="btn btn-primary" type="submit">Register</button>

@@ -8,12 +8,13 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\CallbackTransformer;
+
 class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('username')
+            ->add('email')
             ->add('Roles', ChoiceType::class, [
                 'required' => true,
                 'multiple' => false,
@@ -36,7 +37,7 @@ class UserType extends AbstractType
                  // transform the string back to an array
                  return [$rolesString];
             }
-        ));
+    ));
     }
 
     public function configureOptions(OptionsResolver $resolver): void
