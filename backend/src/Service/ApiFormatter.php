@@ -7,14 +7,16 @@ class ApiFormatter
     {
         $userJSON=[];
 
-        $userJSON = array(
-        'id' => $user->getId(),
-        'email' => $user->getEmail(),
-        // 'name' => $user->getName(),
-        // 'last_name' => $user->getLastName(),
-        'password' => $user->getPassword(),
-    );
-    return $userJSON;
+        $userJSON = array (
+            'id' => $user->getId(),
+            'email' => $user->getEmail(),
+            'name' => $user->getName(),
+            'last_name' => $user->getLastName(),
+            'phone' => $user->getPhone(),
+            'password' => $user->getPassword(),
+        );
+        
+        return $userJSON;
     }
     
 

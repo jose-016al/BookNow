@@ -29,22 +29,21 @@ class ApiController extends AbstractController
     }
 
     // Crea un nuevo usuario
-    // #[Route('/register', name: 'app_api_create_user', methods: ["POST"])]
     #[Route('/register', name: 'app_api_create_user', methods: ["POST"])]
     public function createUser(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserRepository $userRepository, Apiformatter $apiFormatter, ManagerRegistry $doctrine): JsonResponse
     {
         $entityManager = $doctrine->getManager();
         $data = json_decode($request->getContent(), true);
-        var_dump($data);
+
         if ($userRepository->emailExists($data['email'])) {
-            var_dump("No se ha metido");
             return new JsonResponse(false, 403);
         }
-        var_dump("POR FIN");
-        //Crear un nuevo usuario con los datos recibidos
+            //Crear un nuevo usuario con los datos recibidos
         $user = new User();
         $user->setEmail($data['email']);
-        // $user->setName($data['name']);
+        $user->setName($data['name']);
+        $user->setLastName($data['last_name']);
+        $user->setPhone($data['phone']);
         $user->setRoles(['ROLE_USER']);
         $user->setPassword(
             $userPasswordHasher->hashPassword(

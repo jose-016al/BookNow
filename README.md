@@ -45,4 +45,4 @@ npm start
 ```
   
 
- ### Abre tu navegador web y accede a la URL http://localhost:8000 para visualizar el blog de BookNow.
+ ### Abre tu navegador web y accede a la URL http://localhost:3000 para visualizar el blog de BookNow.
