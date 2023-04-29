@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import Header from '../Components/Header';
 import { Link, Navigate } from 'react-router-dom';
@@ -8,28 +8,33 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isRegistered, setIsRegistered] = useState(false);
+    const [errorMessageEmail, setErrorMessageEmail] = useState("");
+    const [errorMessagePassword, setErrorMessagePassword] = useState("");
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = { email, password };
         try {
-            const response = await fetch('http://localhost:8000/api/', {
-                method: 'POST',
+            const response = await axios.post('http://localhost:8000/api/login', JSON.stringify(data), {
                 headers: {
                     'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
+                }
             });
-            const responseData = await response.json();
-            console.log(responseData);
             setIsRegistered(true);
+            const usuarioJSON = JSON.stringify(response.data);
+            localStorage.setItem("usuario", usuarioJSON);
         } catch (error) {
-            console.error(error);
+            console.error(error.response.data);
+            if (error.response.status === 402) {
+                setErrorMessageEmail(`No existe niguna cuenta con este email`);
+            } else if (error.response.status === 401) {
+                setErrorMessagePassword(`Contraseña incorrecta`);
+            }
         }
     }
 
     if (isRegistered) {
-        return <Navigate to="/Login" replace={true} />;
+        return <Navigate to="/" replace={true} />;
     }
 
     return (
@@ -42,10 +47,12 @@ const Login = () => {
                         <div className="mb-2">
                             <label className="form-label">Correo electronico</label>
                             <input type="email" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} />
+                            {errorMessageEmail && <div className="error text-danger">{errorMessageEmail}</div>}
                         </div>
                         <div className="mb-4">
                             <label className="form-label">Password</label>
                             <input type="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} />
+                            {errorMessagePassword && <div className="error text-danger">{errorMessagePassword}</div>}
                         </div>
                         <div className="d-grid">
                             <button className="btn btn-primary" type="submit">Iniciar sesion</button>

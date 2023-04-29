@@ -15,21 +15,8 @@ use Doctrine\Persistence\ManagerRegistry;
 #[Route('/api')]
 class ApiController extends AbstractController
 {
-    // Devuelve los usuarios
-    #[Route('/users', name: 'app_api_users', methods: ["GET"])]
-    public function usersIndex(Request $request, UserRepository $userRepository, Apiformatter $apiFormatter): JsonResponse
-    {
-        $users = $userRepository->findAll();
-        $usersJSON = [];
-
-        foreach ($users as $user) {
-            $usersJSON[] = $apiFormatter->userToArray($user);
-        }
-        return new JsonResponse($usersJSON);
-    }
-
-    // Crea un nuevo usuario
-    #[Route('/register', name: 'app_api_create_user', methods: ["POST"])]
+        // Obtiene los datos del front y realiza el registro
+    #[Route('/register', name: 'app_api_register', methods: ["POST"])]
     public function createUser(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserRepository $userRepository, Apiformatter $apiFormatter, ManagerRegistry $doctrine): JsonResponse
     {
         $entityManager = $doctrine->getManager();
@@ -38,7 +25,7 @@ class ApiController extends AbstractController
         if ($userRepository->emailExists($data['email'])) {
             return new JsonResponse(false, 403);
         }
-            //Crear un nuevo usuario con los datos recibidos
+        //Crear un nuevo usuario con los datos recibidos
         $user = new User();
         $user->setEmail($data['email']);
         $user->setName($data['name']);
@@ -49,14 +36,39 @@ class ApiController extends AbstractController
             $userPasswordHasher->hashPassword(
                 $user,
                 $data['password']
-                )
-            );
-            // Guardar el nuevo usuario en la base de datos
+            )
+        );
+        // Guardar el nuevo usuario en la base de datos
         $entityManager->persist($user);
         $entityManager->flush();
 
         // Devolver una respuesta al cliente React
-        $userJSON = $apiFormatter->userToArray($user);
+        $userJSON = $apiFormatter->users($user);
+        return new JsonResponse($userJSON, 201);
+    }
+
+    #[Route('/login', name: 'app_api_login', methods: ['POST'])]
+    public function login(Request $request, UserRepository $userRepository, UserPasswordHasherInterface $passwordEncoder, Apiformatter $apiFormatter): JsonResponse
+    {
+        // Obtener los datos de la petición POST
+        $data = json_decode($request->getContent(), true);
+
+        // Buscar al usuario en la base de datos por su email
+        $user = $userRepository->findOneBy(['email' => $data['email']]);
+
+        // Si el usuario no existe, devolver un error de autenticación
+        if (!$user) {
+            return new JsonResponse(false, 402);
+        }
+
+        // Verificar que la contraseña es correcta
+        $isPasswordValid = $passwordEncoder->isPasswordValid($user, $data['password']);
+        if (!$isPasswordValid) {
+            return new JsonResponse(false, 401);
+        }
+
+        // Devolver los datos del usuario en formato JSON
+        $userJSON = $apiFormatter->users($user);
         return new JsonResponse($userJSON, 201);
     }
 }

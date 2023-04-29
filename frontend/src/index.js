@@ -26,10 +26,6 @@ const router = createBrowserRouter([
     path: "/Register",
     element: <Register />,
   },
-  // {
-  //   path: "Posts/:userid",
-  //   element: <Posts />,
-  // },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
