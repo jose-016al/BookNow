@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import './css/comunes.css'
 import Home from './Routes/Home'
+import Error404 from './Routes/Error404';
 import Login from './Routes/Login';
 import Register from './Routes/Register';
 import reportWebVitals from './reportWebVitals';
@@ -16,7 +17,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
-    // errorElement: <Error />,
+    errorElement: <Error404 />,
   },
   {
     path: "/Login",
