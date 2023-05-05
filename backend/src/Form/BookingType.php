@@ -2,42 +2,40 @@
 
 namespace App\Form;
 
-use App\Entity\User;
+use App\Entity\Booking;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\CallbackTransformer;
 
-class UserType extends AbstractType
+class BookingType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email')
-            ->add('name')
-            ->add('last_name')
-            ->add('Roles', ChoiceType::class, [
-                'required' => true,
-                'multiple' => false,
-                'expanded' => false,
-                'choices'  => [
-                    'User' => 'ROLE_USER',
-                    'Admin' => 'ROLE_ADMIN',
+            ->add('type', ChoiceType::class, [
+                'choices' => [
+                    'Opcion1' => 'opcion1',
+                    'Opcion2' => 'opcion2',
                 ],
+                'multiple' => false,
             ])
-            ->add('password');
+            ->add('date')
+            ->add('time')
+            ->add('duration')
+            ->add('user');
 
         // Data transformer
-        $builder->get('Roles')
+        $builder->get('type')
             ->addModelTransformer(new CallbackTransformer(
-                function ($rolesArray) {
+                function ($typeArray) {
                     // transform the array to a string
-                    return count($rolesArray) ? $rolesArray[0] : null;
+                    return count($typeArray) ? $typeArray[0] : null;
                 },
-                function ($rolesString) {
+                function ($typeString) {
                     // transform the string back to an array
-                    return [$rolesString];
+                    return [$typeString];
                 }
             ));
     }
@@ -45,7 +43,7 @@ class UserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => User::class,
+            'data_class' => Booking::class,
         ]);
     }
 }
