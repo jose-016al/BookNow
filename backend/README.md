@@ -6,7 +6,6 @@
   - [Creacion de un servicio para gestionar la informacion de la API](#creacion-de-un-servicio-para-gestionar-la-informacion-de-la-api)
   - [Configuracion de las CORS](#configuracion-de-las-cors)
 
-
 # Creacion del proyecto
 Creamos un nuevo proyecto que sera el encargado de gestionar el backend
 ```php

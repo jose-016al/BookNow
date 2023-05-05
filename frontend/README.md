@@ -1,70 +1,137 @@
-# Getting Started with Create React App
+# frontend docs
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Tabla de contenidos
+- [Creacion del proyecto](#creacion-del-proyecto)
+- [Rutas](#rutas)
+- [Instalacion de Boostrap y SASS](#instalacion-de-bootstrap-y-sass)
+- [Consultas a la API](#consultas-a-la-api)
 
-## Available Scripts
+# Creacion del proyecto
+Para la creacion de la parte del frontend creamos un proyecot de React
+```bash
+npx create-react-app frontend
+```
 
-In the project directory, you can run:
+# Rutas
+Para poder navegar entre las distintas paginas del proyecto usaremos el paquete "react-router-dom"
+```bash
+npm install react-router-dom
+```
+Desde el index.js de nuestro proyecto configuraremos la redireccion 
+```javascript
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-### `npm start`
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+    errorElement: <Error404 />,
+  },
+  {
+    path: "/Login",
+    element: <Login />,
+  },
+  {
+    path: "/Register",
+    element: <Register />,
+  },
+]);
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <RouterProvider router={router} />
+  </React.StrictMode>
+);
+```
+Usaremos Link para los enlaces que nos proporciona react-router-dom
+```javascript
+import { Link } from 'react-router-dom';
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<Link to={`/`}>Usuarios</Link>
+```
+Para redirigir al usuario a una ruta especifica en caso de que sea necesario usaremos Navigate
+```javascript
+import { Link, Navigate } from 'react-router-dom';
 
-### `npm test`
+const Login = () => {
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    const [isRegistered, setIsRegistered] = useState(false);
 
-### `npm run build`
+    const handleSubmit = async (event) => {
+        // ----
+        setIsRegistered(true);
+    }
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    if (isRegistered) {
+        return <Navigate to="/" replace={true} />;
+    }
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+}
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Instalacion de Bootstrap y SASS
+Para la instalacion de Bootstrap
+```bash
+npm install bootstrap react-bootstrap
+```
+lo importamos en el archivo index.js de nuestro proyecot
+```javascript
+import 'bootstrap/dist/css/bootstrap.min.css';
+```
+Para instalar Sass
+```javascript
+npm install node-sass
+```
+Una vez instlado creamos una carpeta llamada scss y en ella creamos el fichero sass, por ultimo licamos el fihcero al index.js. Sass nos generara un directorio con los css que sera el que lincamos
+```javascript
+import './css/comunes.css'
+```
 
-### `npm run eject`
+# Consultas a la API
+Para las consultas por GET usaremos fetch
+```javascript	
+const [usuario, setUsuario] = useState([]);
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+    useEffect(() => {
+        fetchDatos();
+    }, []);
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    const fetchDatos = async () => {
+        try {
+            const url = "https://jsonplaceholder.typicode.com/users";
+            const respuesta = await fetch(url);
+            const json = await respuesta.json();
+            setUsuario(json);
+        }
+        catch (error) {
+            console.log("error: " + error);
+        }
+    }
+```
+Para las consultas por POST usaremos axios
+```bash
+npm install axios
+```
+Para su uso como en el caso del login
+```javascript
+import axios from 'axios';
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+const handleSubmit = async (event) => {
+        event.preventDefault();
+        const data = { email, password };
+        try {
+            const response = await axios.post('http://localhost:8000/api/login', JSON.stringify(data), {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        } catch (error) {
+            console.error(error.response.data);
+        }
+    }
+```
