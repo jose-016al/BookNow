@@ -3,8 +3,9 @@ import axios from 'axios';
 import Header from '../Components/Header';
 import { Link, Navigate } from 'react-router-dom';
 
-const Login = () => {
+const Login = ({ onUserChange }) => {
 
+    
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isRegistered, setIsRegistered] = useState(false);
@@ -21,8 +22,7 @@ const Login = () => {
                 }
             });
             setIsRegistered(true);
-            const usuarioJSON = JSON.stringify(response.data);
-            localStorage.setItem("usuario", usuarioJSON);
+            onUserChange(response.data);
         } catch (error) {
             console.error(error.response.data);
             if (error.response.status === 402) {
@@ -32,7 +32,7 @@ const Login = () => {
             }
         }
     }
-
+    
     if (isRegistered) {
         return <Navigate to="/" replace={true} />;
     }

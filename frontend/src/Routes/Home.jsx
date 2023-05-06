@@ -1,9 +1,10 @@
 import React from 'react';
 import Header from '../Components/Header';
 
-const Home = () => {
+const Home = ({ user }) => {
+    
     return (
-        <Header />
+        <Header user={user} />
     );
 }
 

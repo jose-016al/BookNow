@@ -1,9 +1,7 @@
 import React from 'react';
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const Nav = () => {
-    const user = JSON.parse(localStorage.getItem("usuario"));
+const Nav = ({ user }) => {
     
     const handleLogOut = () => {
         localStorage.removeItem("usuario");

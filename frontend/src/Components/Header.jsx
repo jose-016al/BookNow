@@ -1,11 +1,11 @@
 import React from 'react';
 import Nav from './Nav';
 
-const Header = () => {
+const Header = ({ user }) => {
     return (
         <header className='container'>
             <h1>BookNow</h1>
-            <Nav />
+            <Nav user={user} />
         </header>
     );
 }
