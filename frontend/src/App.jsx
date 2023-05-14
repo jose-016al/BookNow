@@ -9,6 +9,7 @@ import ProtectedRoute from "./Components/ProtectedRoute";
 import Citas from "./Routes/Citas";
 import AuthContext from "./Contexts/AuthContext.js";
 import { createBrowserRouter, RouterProvider, } from "react-router-dom";
+import NewCita from "./Routes/NewCita";
 
 const App = () => {
 
@@ -32,6 +33,13 @@ const App = () => {
             element:
                 <ProtectedRoute isAllowed={user ? false : true} >
                     <Register />
+                </ProtectedRoute>,
+        },
+        {
+            path: '/NewCita',
+            element:
+                <ProtectedRoute isAllowed={user ? true : false} >
+                    <NewCita />
                 </ProtectedRoute>,
         },
         {

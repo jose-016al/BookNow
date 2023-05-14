@@ -16,6 +16,7 @@ const Nav = () => {
                     } 
                     {user != null && 
                     <>
+                        <Link className='enlace' to={`/NewCita`}>Pedir cita</Link>
                         <Link className='enlace' onClick={handleLogOut}>Cerrar sesión</Link>
                         {user.roles === "ROLE_ADMIN" && 
                             <Link className='enlace' to={`/Citas`}>Citas</Link>
