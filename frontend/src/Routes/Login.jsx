@@ -4,8 +4,7 @@ import Header from '../Components/Header';
 import { Link, Navigate } from 'react-router-dom';
 
 const Login = ({ onUserChange }) => {
-
-    
+ 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isRegistered, setIsRegistered] = useState(false);
@@ -22,6 +21,7 @@ const Login = ({ onUserChange }) => {
                 }
             });
             setIsRegistered(true);
+            localStorage.setItem("usuario", JSON.stringify(response.data));
             onUserChange(response.data);
         } catch (error) {
             console.error(error.response.data);

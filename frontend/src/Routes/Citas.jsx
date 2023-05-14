@@ -1,11 +1,11 @@
 import React from 'react';
 import Header from '../Components/Header';
 
-const Citas = ({ user }) => {
+const Citas = () => {
     
     return (
         <>
-            <Header user={user} />
+            <Header />
             <h2>las citas de hoy</h2>
         </>
     );

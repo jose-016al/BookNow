@@ -1,12 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import AuthContext from '../Contexts/AuthContext.js';
 
-const Nav = ({ user }) => {
-    
-    const handleLogOut = () => {
-        localStorage.removeItem("usuario");
-        window.location.reload();
-    }
+const Nav = () => {
+
+    const { user, handleLogOut } = useContext(AuthContext);
 
     return(
         <nav>

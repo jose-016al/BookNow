@@ -1,10 +1,10 @@
 import React from 'react';
 import Header from '../Components/Header';
 
-const Home = ({ user }) => {
+const Home = () => {
     
     return (
-        <Header user={user} />
+        <Header  />
     );
 }
 
