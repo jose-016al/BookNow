@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Service\ApiFormatter;
 use App\Entity\User;
+use App\Repository\BookingRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Repository\UserRepository;
 use Symfony\Component\Routing\Annotation\Route;
@@ -71,4 +72,18 @@ class ApiController extends AbstractController
         $userJSON = $apiFormatter->users($user);
         return new JsonResponse($userJSON, 201);
     }
+
+    #[Route('/bookings', name: 'app_api_booking', methods:["GET"])]
+    public function usersIndex(BookingRepository $bookingRepository, Apiformatter $apiFormatter): JsonResponse
+    {
+        $booking = $bookingRepository->findAll();
+        $bookingJSON = [];
+
+        foreach($booking as $book) {
+            $bookingJSON[] = $apiFormatter->bookings($book);
+        }
+        
+        return new JsonResponse($bookingJSON);
+    }
+
 }

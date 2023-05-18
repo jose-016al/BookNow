@@ -45,7 +45,7 @@ const App = () => {
         {
             path: '/Citas',
             element: 
-                <ProtectedRoute isAllowed={!!user && user.roles.includes('ROLE_ADMIN')}>
+                <ProtectedRoute isAllowed={!!user && user.roles.includes('ROLE_EMPLEADO')}>
                     <Citas />
                 </ProtectedRoute>,
         },

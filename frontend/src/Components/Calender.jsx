@@ -35,7 +35,7 @@ const Calender = ({ onDateChange }) => {
 
     return (
         <>
-            <div className='container'>
+            <div id='calender'>
                 <Calendar onChange={handleDateChange} tileDisabled={({ date }) => isDisabled(date)} />
             </div>
         </>

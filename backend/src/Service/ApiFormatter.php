@@ -20,4 +20,21 @@ class ApiFormatter
         return $userJSON;
     }
 
+    public function bookings($booking): array
+    {
+        $bookingJSON=[];
+
+        $bookingJSON = array (
+            'id' => $booking->getId(),
+            'type' => $booking->getType(),
+            'date' => $booking->getDate(),
+            'time' => $booking->getTime(),
+            'duration' => $booking->getDuration(),
+            'name' => $booking->getUser()->getName(),
+            'last_name' => $booking->getUser()->getLastName(),
+        );
+        
+        return $bookingJSON;
+    }
+
 }

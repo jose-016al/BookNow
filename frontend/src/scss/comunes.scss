@@ -27,6 +27,24 @@ header nav ul li .enlace {
 }
 
 /* ====================
+    NewCita y sus componentes
+==================== */
+#containerNewCita {
+    box-shadow: 2px 4px 5px 2px #cccc;
+    border-radius: 20px;
+    padding: 20px;
+    width: 60%;
+    margin: 0 auto;
+}
+#calender {
+    display: flex;
+    justify-content: center;
+}
+.cita-pasada {
+    text-decoration: line-through;
+}
+
+/* ====================
     404 page
 ==================== */
 .page_404 {
