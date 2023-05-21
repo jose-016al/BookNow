@@ -1,0 +1,31 @@
+@media (max-width: 768px) {
+    .navbar-burger {
+        display: block;
+    }
+    header nav ul {
+        flex-direction: column;
+        position: absolute;
+        top: -700px;
+        left: -2000px;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        transition: all .5s ease;
+    }
+
+    header nav .active {
+        display: block;
+        position: absolute;
+        margin-left: auto;
+        margin-right: auto;
+        top: 25%;
+        left: 0;
+        right: 0;
+        text-align: center;
+    }
+    
+    header nav ul li .enlace {
+        font-size: 25px;
+    }
+}

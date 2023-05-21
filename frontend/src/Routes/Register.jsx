@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Header from '../Components/Header';
+import Footer from '../Components/Footer';
 import { Link, Navigate } from 'react-router-dom';
 
 const Register = () => {
@@ -123,6 +124,7 @@ const Register = () => {
                     </form>
                 </div>
             </div>
+            <Footer />
         </>
     );
 }

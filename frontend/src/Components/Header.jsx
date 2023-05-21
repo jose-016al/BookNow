@@ -3,8 +3,8 @@ import Nav from './Nav';
 
 const Header = () => {
     return (
-        <header className='container'>
-            <h1>BookNow</h1>
+        <header>
+            <h1 className="navbar-title">BookNow</h1>
             <Nav />
         </header>
     );

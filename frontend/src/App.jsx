@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import './css/comunes.css'
-import 'bootstrap/dist/css/bootstrap.min.css';
+import './css/comunes768.css';
 import Home from './Routes/Home';
 import Error404 from './Routes/Error404';
 import Login from './Routes/Login';
