@@ -28,4 +28,15 @@
     header nav ul li .enlace {
         font-size: 25px;
     }
+
+    
+    #calender.active {
+        transform: none;
+    }
+
+    #formNewCita.active {
+        opacity: 1;
+        transform: none;
+        top: 65%;
+    }
 }

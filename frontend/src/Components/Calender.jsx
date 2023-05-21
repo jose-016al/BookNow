@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
 const Calender = ({ onDateChange }) => {
 
-    const handleDateChange = (date) => {
-        date = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
-        onDateChange(date);
-    };
+    const [selectedDate, setSelectedDate] = useState(null);
 
+    const handleDateChange = (date) => {
+        // date = date.getFullYear() + "/" + date.getMonth() + "/" + date.getDate();
+        onDateChange(date);
+        setSelectedDate(date);
+    };
+    
+    console.log(selectedDate );
 
     // Lista de días a deshabilitar (festivos o específicos)
     const diasDeshabilitados = [
@@ -35,7 +39,7 @@ const Calender = ({ onDateChange }) => {
 
     return (
         <>
-            <div id='calender'>
+            <div id='calender' className={`${selectedDate ? 'active' : ''}`}>
                 <Calendar onChange={handleDateChange} tileDisabled={({ date }) => isDisabled(date)} />
             </div>
         </>
