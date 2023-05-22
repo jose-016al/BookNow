@@ -11,8 +11,6 @@ const Calender = ({ onDateChange }) => {
         onDateChange(date);
         setSelectedDate(date);
     };
-    
-    console.log(selectedDate );
 
     // Lista de días a deshabilitar (festivos o específicos)
     const diasDeshabilitados = [

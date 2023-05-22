@@ -86,4 +86,16 @@ class ApiController extends AbstractController
         return new JsonResponse($bookingJSON);
     }
 
+    #[Route('/bookingsTypes', name: 'app_api_bookingTypes', methods:["GET"])]
+    public function getBookingTypes()
+    {
+        $tiposCitas = [
+            ['type' => 'Corte', 'duracion' => 30],
+            ['type' => 'Peinado', 'duracion' => 60],
+            ['type' => 'Tinte', 'duracion' => 45]
+        ];
+
+        return new JsonResponse($tiposCitas);
+    }
+
 }

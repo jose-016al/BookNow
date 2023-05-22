@@ -45,7 +45,7 @@ const Citas = () => {
     return (
         <>
             <Header />
-            <div className='container'>
+            <div className='container mt-4'>
                 <h2 className='text-center'>Las citas de hoy {`${dia}/${mes}/${año}`}</h2>
                 <div className='mt-4' id='containerNewCita'>
                     {citasHoy && citasHoy.length > 0 ? (
