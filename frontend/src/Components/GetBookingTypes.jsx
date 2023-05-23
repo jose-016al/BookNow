@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 const GetBookingTypes = ({ bookingTypes }) => {
 
     const [types, setTypes] = useState(null);
+    const [selectedType, setSelectedType] = useState(undefined); 
+
 
     useEffect(() => {
         fetchDatos();
@@ -26,13 +28,14 @@ const GetBookingTypes = ({ bookingTypes }) => {
         if (type) {
             bookingTypes(type); // Pasar el tipo de cita seleccionado
         }
+        setSelectedType(selectedType);
     };
 
     return (
         <>
             {types && (
-                <select value="" onChange={handleTypesChange}>
-                    <option value="" disabled>Selecciona un tipo de cita</option>
+                <select className='form-select form-select-sm' value={selectedType} onChange={handleTypesChange}>
+                    <option value="">Selecciona un tipo de cita</option>
                     {types.map((type, index) => (
                         <option key={index} value={type.type}>
                             {type.type}

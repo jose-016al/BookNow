@@ -90,9 +90,13 @@ class ApiController extends AbstractController
     public function getBookingTypes()
     {
         $tiposCitas = [
+            ['type' => 'Lavado', 'duracion' => 15],
             ['type' => 'Corte', 'duracion' => 30],
-            ['type' => 'Peinado', 'duracion' => 60],
-            ['type' => 'Tinte', 'duracion' => 45]
+            ['type' => 'Peinado', 'duracion' => 30],
+            ['type' => 'Tinte', 'duracion' => 60],
+            ['type' => 'Alisado', 'duracion' => 90],
+            ['type' => 'Moldeador', 'duracion' => 90],
+            ['type' => 'Mechas', 'duracion' => 300],
         ];
 
         return new JsonResponse($tiposCitas);
