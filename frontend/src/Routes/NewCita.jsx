@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import Calender from '../Components/Calender';
@@ -8,9 +8,13 @@ import 'react-calendar/dist/Calendar.css';
 const NewCita = () => {
 
     const [date, setDate] = useState(null);
-    const [type, setType] = useState([null]);
+    const [type, setType] = useState(null);
     const [duration, setDuration] = useState(null);
 
+    if (type && duration !== null) {
+        console.log(type);
+        console.log(duration);
+    }
 
     const handleSubmit = async (event) => {
 
@@ -21,16 +25,16 @@ const NewCita = () => {
     };
 
     const handleBookingTypes = (types) => {
-        setType(types.type);
-        setDuration(types.duracion);
+        const selectedTypeValues = types.map((selectedType) => selectedType.type);
+        const selectedDurationValues = types.map((selectedType) => selectedType.duration);
+        setType(selectedTypeValues);
+        setDuration(selectedDurationValues.reduce((total, duration) => total + duration, 0));
     };
     
-    console.log(type);
-    console.log(duration);
     return (
         <>
             <Header />
-            <div className='container mt-4'>
+            <div className='container mt-4' id='containerNewCita'>
                 <h2>Escoge el dia de tu cita</h2>
                 <div className='row justify-content-center mt-4'>
                     <Calender onDateChange={handleDateChange} />

@@ -136,7 +136,7 @@ header nav ul li .enlace {
         LOGIN Y REGISTRO
 ==================== */
 #containerLogin {
-  box-shadow: 2px 4px 5px 2px rgba(204, 204, 204, 0.8);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
   border-radius: 20px;
   padding: 20px;
 }
@@ -144,8 +144,8 @@ header nav ul li .enlace {
 /* ====================
         NewCita y sus componentes
 ==================== */
-#containerNewCita {
-  box-shadow: 2px 4px 5px 2px rgba(204, 204, 204, 0.8);
+#containerCita {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
   border-radius: 20px;
   padding: 20px;
   width: 60%;
@@ -157,21 +157,24 @@ header nav ul li .enlace {
   justify-content: center;
   transition: all 2s ease-in-out;
   transform: translateX(0%);
+  z-index: 2;
+  width: 40%;
 }
 
 #calender.active {
-  transform: translateX(-22%);
+  transform: translateX(-60%);
 }
 
 #formNewCita {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
   position: absolute;
-  top: 26%;
+  top: 30%;
   transform: translateX(0%);
-  opacity: 0;
   transition: all 2s ease-in-out;
 }
 
 #formNewCita.active {
+  position: none;
   opacity: 1;
   transform: translateX(60%);
 }

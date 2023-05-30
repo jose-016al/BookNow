@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
+
 
 const Calender = ({ onDateChange }) => {
 
@@ -38,7 +38,9 @@ const Calender = ({ onDateChange }) => {
     return (
         <>
             <div id='calender' className={`${selectedDate ? 'active' : ''}`}>
+                <div>
                 <Calendar onChange={handleDateChange} tileDisabled={({ date }) => isDisabled(date)} />
+                </div>
             </div>
         </>
     );

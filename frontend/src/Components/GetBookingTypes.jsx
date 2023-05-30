@@ -3,12 +3,13 @@ import React, { useEffect, useState } from 'react';
 const GetBookingTypes = ({ bookingTypes }) => {
 
     const [types, setTypes] = useState(null);
-    const [selectedType, setSelectedType] = useState(undefined); 
-
+    const [selectedTypes, setSelectedTypes] = useState([]);
 
     useEffect(() => {
         fetchDatos();
-    }, []);
+        bookingTypes(selectedTypes);
+    }, [selectedTypes]);
+
 
     const fetchDatos = async () => {
         try {
@@ -23,19 +24,24 @@ const GetBookingTypes = ({ bookingTypes }) => {
     }
 
     const handleTypesChange = (event) => {
-        const selectedType = event.target.value;
-        const type = types.find((type) => type.type === selectedType);
-        if (type) {
-            bookingTypes(type); // Pasar el tipo de cita seleccionado
-        }
-        setSelectedType(selectedType);
+        const selectedValue = event.target.value;
+        const selectedType = types.find((type) => type.type === selectedValue);
+
+        setSelectedTypes((prevSelectedTypes) => {
+            const isTypeSelected = prevSelectedTypes.some((type) => type.type === selectedValue);
+
+            if (isTypeSelected) {
+                return prevSelectedTypes.filter((type) => type.type !== selectedValue);
+            } else {
+                return [...prevSelectedTypes, selectedType];
+            }
+        });
     };
 
     return (
         <>
             {types && (
-                <select className='form-select form-select-sm' value={selectedType} onChange={handleTypesChange}>
-                    <option value="">Selecciona un tipo de cita</option>
+                <select className='form-select form-select-sm' multiple value={selectedTypes} onChange={handleTypesChange}>
                     {types.map((type, index) => (
                         <option key={index} value={type.type}>
                             {type.type}

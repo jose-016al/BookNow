@@ -46,8 +46,8 @@ const Citas = () => {
         <>
             <Header />
             <div className='container mt-4'>
-                <h2 className='text-center'>Las citas de hoy {`${dia}/${mes}/${año}`}</h2>
-                <div className='mt-4' id='containerNewCita'>
+                <h2>Las citas de hoy {`${dia}/${mes}/${año}`}</h2>
+                <div className='mt-4' id='containerCita'>
                     {citasHoy && citasHoy.length > 0 ? (
                         <table className="table">
                             <thead className="thead-light">
