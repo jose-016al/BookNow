@@ -109,9 +109,14 @@ class ApiController extends AbstractController
         $data = json_decode($request->getContent(), true);
 
         $user = $userRepository->find($data['user_id']);
+
         $dateString = $data['date'];
         $timeString = $data['time'];
-        $date = new \DateTime($dateString);
+
+        $timezone = new \DateTimeZone('Europe/Madrid');
+        $date = new \DateTime($dateString, $timezone);
+        var_dump($date);
+        var_dump($dateString);
         $time = new \DateTime($timeString);
 
             // Verificar si se encontró el usuario
@@ -130,6 +135,7 @@ class ApiController extends AbstractController
         $entityManager->persist($booking);
         $entityManager->flush();
 
-        return new JsonResponse("Cita registrada", 201);
+        $bookingJSON = $apiFormatter->bookings($booking);
+        return new JsonResponse($bookingJSON, 201);
     }
 }

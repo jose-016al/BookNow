@@ -18,10 +18,10 @@ const NewCita = () => {
     const [type, setType] = useState(null);
     const [duration, setDuration] = useState(null);
     const user_id = getUserId();
-    console.log(user_id);
 
     const handleDateChange = (date) => {
         setDate(date);
+        console.log(date);
     };
 
     const handleTimeChange = (time) => {
@@ -37,14 +37,15 @@ const NewCita = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const data = { user_id, type, date, time, duration };
+        const formattedDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+        const data = { user_id, type, date: formattedDate, time, duration };
         try {
             const response = await axios.post('http://localhost:8000/api/newBooking', JSON.stringify(data), {
                 headers: {
                     'Content-Type': 'application/json'
                 }
             });
-            console.log(response);
+            console.log(response.data);
         } catch (error) {
             console.error(error.response.data);
         }
