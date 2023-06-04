@@ -22,7 +22,11 @@ const AuthProvider = ({children}) => {
         window.location.reload();
     }
 
-    const data = {user, handleUserChange, handleLogOut};
+    const getUserId = () => {
+        return user ? user.id : null;
+    };
+
+    const data = {user, handleUserChange, handleLogOut, getUserId};
     return <AuthContext.Provider value={data}>{children}</AuthContext.Provider>
 }
 

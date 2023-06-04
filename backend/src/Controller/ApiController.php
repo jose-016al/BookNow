@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Booking;
 use App\Service\ApiFormatter;
 use App\Entity\User;
 use App\Repository\BookingRepository;
@@ -16,7 +17,6 @@ use Doctrine\Persistence\ManagerRegistry;
 #[Route('/api')]
 class ApiController extends AbstractController
 {
-        // Obtiene los datos del front y realiza el registro
     #[Route('/register', name: 'app_api_register', methods: ["POST"])]
     public function createUser(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserRepository $userRepository, Apiformatter $apiFormatter, ManagerRegistry $doctrine): JsonResponse
     {
@@ -73,21 +73,21 @@ class ApiController extends AbstractController
         return new JsonResponse($userJSON, 201);
     }
 
-    #[Route('/bookings', name: 'app_api_booking', methods:["GET"])]
+    #[Route('/bookings', name: 'app_api_booking', methods: ["GET"])]
     public function usersIndex(BookingRepository $bookingRepository, Apiformatter $apiFormatter): JsonResponse
     {
         $booking = $bookingRepository->findAll();
         $bookingJSON = [];
 
-        foreach($booking as $book) {
+        foreach ($booking as $book) {
             $bookingJSON[] = $apiFormatter->bookings($book);
         }
-        
+
         return new JsonResponse($bookingJSON);
     }
 
-    #[Route('/bookingsTypes', name: 'app_api_bookingTypes', methods:["GET"])]
-    public function getBookingTypes()
+    #[Route('/bookingsTypes', name: 'app_api_bookingTypes', methods: ["GET"])]
+    public function getBookingTypes(): JsonResponse
     {
         $tiposCitas = [
             ['type' => 'Lavado', 'duration' => 15],
@@ -102,4 +102,34 @@ class ApiController extends AbstractController
         return new JsonResponse($tiposCitas);
     }
 
+    #[Route('/newBooking', name: 'app_api_newBooking', methods: ["POST"])]
+    public function createBooking(Request $request, UserRepository $userRepository, Apiformatter $apiFormatter, ManagerRegistry $doctrine): JsonResponse
+    {
+        $entityManager = $doctrine->getManager();
+        $data = json_decode($request->getContent(), true);
+
+        $user = $userRepository->find($data['user_id']);
+        $dateString = $data['date'];
+        $timeString = $data['time'];
+        $date = new \DateTime($dateString);
+        $time = new \DateTime($timeString);
+
+            // Verificar si se encontró el usuario
+        if (!$user) {
+            return new JsonResponse("Usuario no encontrado", 404);
+        }
+
+        $booking = new Booking();
+        $booking->setUser($user);
+        $booking->setType($data['type']);
+        $booking->setDate($date);
+        $booking->setTime($time);
+        $booking->setDuration($data['duration']);
+
+            // Guardar la nuevo cita en la base de datos
+        $entityManager->persist($booking);
+        $entityManager->flush();
+
+        return new JsonResponse("Cita registrada", 201);
+    }
 }

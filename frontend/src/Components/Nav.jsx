@@ -9,6 +9,7 @@ const Nav = () => {
     const { user, handleLogOut } = useContext(AuthContext);
 
     const [clicked, setClicked] = useState(false)
+    
     const handleClick = () => {
         //cuando esta true lo pasa a false y vice versa
         setClicked(!clicked)

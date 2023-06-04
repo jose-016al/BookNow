@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 
-
 const Calender = ({ onDateChange }) => {
 
     const [selectedDate, setSelectedDate] = useState(null);

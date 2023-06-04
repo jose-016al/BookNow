@@ -30,8 +30,7 @@ class ApiFormatter
             'date' => $booking->getDate(),
             'time' => $booking->getTime(),
             'duration' => $booking->getDuration(),
-            'name' => $booking->getUser()->getName(),
-            'last_name' => $booking->getUser()->getLastName(),
+            'user' => $booking->getUser()->getId(),
         );
         
         return $bookingJSON;
