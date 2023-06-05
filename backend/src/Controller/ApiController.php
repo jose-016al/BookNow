@@ -115,8 +115,7 @@ class ApiController extends AbstractController
 
         $timezone = new \DateTimeZone('Europe/Madrid');
         $date = new \DateTime($dateString, $timezone);
-        var_dump($date);
-        var_dump($dateString);
+
         $time = new \DateTime($timeString);
 
             // Verificar si se encontró el usuario
@@ -135,7 +134,6 @@ class ApiController extends AbstractController
         $entityManager->persist($booking);
         $entityManager->flush();
 
-        $bookingJSON = $apiFormatter->bookings($booking);
-        return new JsonResponse($bookingJSON, 201);
+        return new JsonResponse("Cita registrada", 201);
     }
 }

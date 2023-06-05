@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import Calender from '../Components/Calender';
@@ -7,7 +7,6 @@ import Time from '../Components/Time';
 import AuthContext from '../Contexts/AuthContext.js';
 import 'react-calendar/dist/Calendar.css';
 import axios from 'axios';
-
 
 const NewCita = () => {
 
@@ -21,7 +20,6 @@ const NewCita = () => {
 
     const handleDateChange = (date) => {
         setDate(date);
-        console.log(date);
     };
 
     const handleTimeChange = (time) => {
@@ -65,7 +63,7 @@ const NewCita = () => {
                         <GetBookingTypes bookingTypes={handleBookingTypes} />
                         <div className="mb-2">
                             <label>Selecciona una hora</label>
-                            <Time onTimeChange={handleTimeChange} />
+                            <Time date={date} onTimeChange={handleTimeChange} />
                         </div>
                         <div className="d-grid mb-3">
                             <button className="btn btn-primary" type="submit">Solicitar cita</button>
