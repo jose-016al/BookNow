@@ -9,29 +9,52 @@ const Time = ({ date, onTimeChange }) => {
     const [horasDisponibles, sethorasDisponibles] = useState([]);
 
     const horas = [
-        '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00',
-        '17:00', '18:00', '19:00', '20:00', '21:00',
+        '08:00', '08:15', '08:30', '08:45', '09:00', '09:15', '09:30', '09:45',
+        '10:00', '10:15', '10:30', '10:45', '11:00', '11:15', '11:30', '11:45',
+        '12:00', '12:15', '12:30', '12:45', '13:00', '13:15', '13:30', '13:45',
+        '17:00', '17:15', '17:30', '17:45', '18:00', '18:15', '18:30', '18:45',
+        '19:00', '19:15', '19:30', '19:45', '20:00', '20:15', '20:30', '20:45',
     ];
-
-    useEffect(() => {
-        // Filtrar las horas que no coinciden con los tiempos
-        const filteredHours = horas.filter(hora => !times.includes(hora));
-        sethorasDisponibles(filteredHours);
-    }, [times]);
 
     const handleBookingChange = (booking) => {
         setBookings(booking);
-        console.log(booking);
-        // Extraer las horas de cada booking y guardarlas en el estado
-        const extractedTimes = booking.map((bookingItem) => {
+        setTimes(booking.map(bookingItem => bookingItem.time.date));
+
+        const horasFiltradas = filterAvailableHours(booking);
+        sethorasDisponibles(horasFiltradas);
+    };
+
+    const filterAvailableHours = (bookings) => {
+        // Obtener los tiempos finales de las reservas
+        const finalTimes = bookings.map(bookingItem => {
             const timeString = bookingItem.time.date;
             const dateObj = new Date(timeString);
             const hours = dateObj.getHours();
             const minutes = dateObj.getMinutes();
-            const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
-            return formattedTime;
+            const duration = bookingItem.duration;
+            const endTime = new Date(dateObj.getTime() + duration * 60000); // Multiplicar la duración por 60000 para convertir minutos a milisegundos
+
+            // Ajustar el tiempo final a un múltiplo de 15 minutos
+            const endHours = endTime.getHours();
+            const endMinutes = Math.ceil(endTime.getMinutes() / 15) * 15;
+
+            const finalTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+            const endTimeString = `${endHours.toString().padStart(2, '0')}:${endMinutes.toString().padStart(2, '0')}`;
+            return { startTime: finalTime, endTime: endTimeString };
         });
-        setTimes(extractedTimes);
+
+        // Filtrar las horas que coinciden con los tiempos finales
+        const filteredHours = horas.filter(hora => {
+            for (let i = 0; i < finalTimes.length; i++) {
+                const { startTime, endTime } = finalTimes[i];
+                if (hora >= startTime && hora < endTime) {
+                    return false;
+                }
+            }
+            return true;
+        });
+
+        return filteredHours;
     };
 
     const handleTimeChange = (event) => {
