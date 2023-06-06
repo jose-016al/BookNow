@@ -14,7 +14,7 @@ class ApiFormatter
             'last_name' => $user->getLastName(),
             'phone' => $user->getPhone(),
             // 'password' => $user->getPassword(),
-            'roles' => $user->getRoles()[0],
+            'roles' => $user->getRoles(),
         );
         
         return $userJSON;

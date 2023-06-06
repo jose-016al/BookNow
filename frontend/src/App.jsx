@@ -65,6 +65,13 @@ const App = () => {
                     <BookingConfirmed />
                 </ProtectedRoute>,
         },
+        {
+            path: '/admin',
+            element: 
+                <ProtectedRoute isAllowed={!!user && user.roles.includes('ROLE_ADMIN')}>
+                    {/* --esto es solo para evitar que otros usuarios accedan a admin-- */}
+                </ProtectedRoute>,
+        },
     ]);
 
     return (

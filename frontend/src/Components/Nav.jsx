@@ -30,7 +30,7 @@ const Nav = () => {
                     {user != null &&
                         <>
                             <li><Link className='enlace' to={`/newcita`}>Pedir cita</Link></li>
-                            {user.roles === "ROLE_EMPLEADO" &&
+                            {user.roles.includes("ROLE_EMPLEADO") &&
                                 <li className={`enlace ${showNavBooking ? 'active' : ''}`}>
                                     <Link className='enlace' onClick={handleShowBooking}>
                                         <div className="menu-item">
@@ -46,6 +46,9 @@ const Nav = () => {
                                 </li>
                             }
                             <li><Link className='enlace' onClick={handleLogOut}>Cerrar sesión</Link></li>
+                            {user.roles.includes("ROLE_ADMIN") && 
+                                <li><a className='enlace' href="http://localhost:8000/admin" target="_blank" rel="noopener noreferrer">Admin</a></li>
+                            } 
                         </>
                     }
                 </ul>
