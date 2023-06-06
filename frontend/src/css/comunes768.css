@@ -15,7 +15,6 @@
   }
   header nav .active {
     display: block;
-    position: absolute;
     margin-left: auto;
     margin-right: auto;
     top: 25%;
@@ -26,14 +25,31 @@
   header nav ul li .enlace {
     font-size: 25px;
   }
+  header nav ul li .enlace:hover {
+    color: white;
+    background-color: transparent;
+  }
+  header nav ul li .enlace .menu-item:hover #img {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYEAQAAAAa7ikwAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAAAqo0jMgAAAAlwSFlzAAAAYAAAAGAA8GtCzwAAAAd0SU1FB+cGBg8cNKEhxTMAAAFUSURBVEjH7ZK9agJREIV3Y/yJroJgo6Wp901S2aWz20awEWy2SaeFYGERCAQMCIKQQgQh/iA2NnY+gXkJMbjzpViTgQQxGlMk5MBt7j3zzbnDGMa//r4gk0Fs++RcsW1Ipw14fgYRKBZPF7pY9JnLpYEMh7xJXPf7yV1XeYOBAbEY8vT0fkm1CqZ5XPKbG+VMJkg8vu0aDsPjoz7e3sLZ2dfBpgn1utb3enBx8cEUCECzqaZWCzk/3w8PBOD+XuvabSQY3G2Wuzs1d7sQieyedygEnY76Hx72hgLTRGo1LRqPEcv67ItGod9XX6NxyFgNKJe1eDpFEglNblnIaKTvlcrBG+GDCgV/nwHmcySVgmQSmc22eyhIqXQUXJs4DnieD1ws/APgeYjjfAuu47q+hpcXHclmA/n8SeD6k6srWK1gvYZc7qRw/cnlJWSzPwL/1+/VK0r3eJh7FTh0AAAAAElFTkSuQmCC);
+  }
   #calender.active {
     transform: none;
   }
+  #formNewCita {
+    margin-top: 20px;
+    margin-bottom: 50px;
+  }
   #formNewCita.active {
+    position: static;
     opacity: 1;
     transform: none;
     top: 65%;
-    height: 320px;
-    margin-bottom: 20px;
+  }
+  header nav ul li .enlace .nav-booking {
+    width: 70%;
+    top: 55%;
+    right: 0%;
+    border-bottom-right-radius: 150px;
+    transform: translateY(-20px);
   }
 }/*# sourceMappingURL=comunes768.css.map */

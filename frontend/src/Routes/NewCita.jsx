@@ -56,7 +56,7 @@ const NewCita = () => {
                 <h2>Escoge el dia de tu cita</h2>
                 <div className='row justify-content-center mt-4'>
                     <Calender onDateChange={handleDateChange} />
-                    <form className={`col-12 col-md-3 ${date  ? 'active' : ''}`} id='formNewCita' onSubmit={handleSubmit}>
+                    <form className={`col-11 col-md-3 ${date  ? 'active' : ''}`} id='formNewCita' onSubmit={handleSubmit}>
                         {date && (
                             <h4>Tu cita será el {date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear()}</h4>
                         )}

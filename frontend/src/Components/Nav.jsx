@@ -31,11 +31,11 @@ const Nav = () => {
                         <>
                             <li><Link className='enlace' to={`/newcita`}>Pedir cita</Link></li>
                             {user.roles.includes("ROLE_EMPLEADO") &&
-                                <li className={`enlace ${showNavBooking ? 'active' : ''}`}>
+                                <li className={`${showNavBooking ? 'active' : ''}`}>
                                     <Link className='enlace' onClick={handleShowBooking}>
                                         <div className="menu-item">
                                             <p>Citas</p>
-                                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQEAQAAADlauupAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAAAqo0jMgAAAAlwSFlzAAAAYAAAAGAA8GtCzwAAAAd0SU1FB+cGBgsBJqr9cLsAAACDSURBVDjL1ZHLCYAwDEC7QRG6Qifwku5/9RBH6AJCF8jzUFHED603A7kkvJeQOPf/ABHM+27OvAcRBzmDKhZCOxwCqELODsYRlgXmuUUCwwDTBKWAyFZsk9zCR/Nd8gpfJeebNMFPki74kKRUAdWapUBKfX/eN+mYfJFYjFiMn+D/xAoJj7kuaXqkAAAAAABJRU5ErkJggg==" alt="flecha" />
+                                            <p id='img'></p>
                                         </div>
                                         <ul className={`nav-booking ${showNavBooking ? 'active' : ''}`}>
                                             <li><Link className='enlace' to={`/bookingtoday`}>Citas de hoy</Link></li>
