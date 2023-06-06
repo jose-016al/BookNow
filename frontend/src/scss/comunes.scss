@@ -29,8 +29,9 @@ header h1 {
 header nav ul {
     list-style: none;
     display: flex;
-    margin-right: 50px;
-    margin-top: 15px;
+    align-items: center;
+    margin: 10px 50px 10px 10px;
+    padding: 0px;
     z-index: 3;
 }
 
@@ -38,8 +39,50 @@ header nav ul li .enlace {
     color: white;
     text-decoration: none;
     font-size: 20px;
-    padding: 15px;
+    padding: 10px;
     display: block;
+}
+
+    // Menu desplegable de las citas
+header nav ul li .enlace .menu-item {
+    display: flex;
+    align-items: center;
+}
+
+header nav ul li .enlace .menu-item p {
+    margin: 0px;
+    padding-right: 10px;
+}
+
+header nav ul li .enlace .menu-item img {
+    padding-top: 5px;
+}
+
+header nav ul li .enlace .nav-booking {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    position: absolute;
+    background-color: $color-primary;
+    right: 10%;
+
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    transform: translateY(-10px);
+}
+
+header nav ul li .enlace .nav-booking li .enlace {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 10px;
+    display: block;
+}
+
+  
+header nav ul li .enlace .nav-booking.active {
+    opacity: 1;
+    transform: translateY(0);
 }
 
     /* ====================
@@ -148,9 +191,7 @@ header nav ul li .enlace {
 #containerCita {
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
     border-radius: 20px;
-    padding: 20px;
-    width: 60%;
-    margin: 0 auto;
+    padding: 10px;
 }
 
 #calender {
@@ -185,6 +226,18 @@ header nav ul li .enlace {
 .cita-pasada {
     text-decoration: line-through;
 }
+
+    /* ====================
+            BookingPending
+    ==================== */
+#imgbookingsPending {
+    display: flex;
+    justify-content: center;
+}
+#imgbookingsPending > img {
+    padding: 0px 5px 0px 5px;
+}
+
 
     /* ====================
             404 page

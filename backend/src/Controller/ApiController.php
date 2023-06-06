@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManagerInterface;
 
 #[Route('/api')]
 class ApiController extends AbstractController
@@ -76,7 +77,7 @@ class ApiController extends AbstractController
     #[Route('/bookings', name: 'app_api_booking', methods: ["GET"])]
     public function usersIndex(BookingRepository $bookingRepository, Apiformatter $apiFormatter): JsonResponse
     {
-        $booking = $bookingRepository->findAll();
+        $booking = $bookingRepository->findAllOrderedByDateTime();
         $bookingJSON = [];
 
         foreach ($booking as $book) {
@@ -118,7 +119,7 @@ class ApiController extends AbstractController
 
         $time = new \DateTime($timeString);
 
-            // Verificar si se encontró el usuario
+        // Verificar si se encontró el usuario
         if (!$user) {
             return new JsonResponse("Usuario no encontrado", 404);
         }
@@ -130,10 +131,48 @@ class ApiController extends AbstractController
         $booking->setTime($time);
         $booking->setDuration($data['duration']);
 
-            // Guardar la nuevo cita en la base de datos
+        // Guardar la nuevo cita en la base de datos
         $entityManager->persist($booking);
         $entityManager->flush();
 
         return new JsonResponse("Cita registrada", 201);
     }
+
+    #[Route('/booking/status/{id}', name: 'app_api_changestatus', methods: ["PUT"])]
+    public function changeBookingStatus($id, BookingRepository $bookingRepository, ManagerRegistry $doctrine): JsonResponse
+    {
+        $entityManager = $doctrine->getManager();
+
+        $booking = $bookingRepository->find($id);
+
+        if (!$booking) {
+            return new JsonResponse(['error' => 'Reserva no encontrada'], 404);
+        }
+
+        $booking->setStatus(2);
+
+        $entityManager->flush();
+
+        return new JsonResponse(['message' => 'Estado de reserva cambiado correctamente']);
+    }
+
+    #[Route('/booking/delete/{id}', name: 'app_api_changeHidden', methods: ["PUT"])]
+    public function changeBookingHidden($id, BookingRepository $bookingRepository, ManagerRegistry $doctrine): JsonResponse
+    {
+        $entityManager = $doctrine->getManager();
+
+        $booking = $bookingRepository->find($id);
+
+        if (!$booking) {
+            return new JsonResponse(['error' => 'Reserva no encontrada'], 404);
+        }
+
+        $booking->setStatus(0);
+
+        $entityManager->flush();
+
+        return new JsonResponse(['message' => 'Cita cancelada correctamente']);
+    }
+
+    
 }

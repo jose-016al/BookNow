@@ -6,7 +6,9 @@ import Error404 from './Routes/Error404';
 import Login from './Routes/Login';
 import Register from './Routes/Register';
 import ProtectedRoute from "./Components/ProtectedRoute";
-import Citas from "./Routes/Citas";
+import BookingToday from "./Routes/BookingToday";
+import BookingPending from "./Routes/BookingPending";
+import BookingConfirmed from "./Routes/BookingConfirmed";
 import AuthContext from "./Contexts/AuthContext.js";
 import { createBrowserRouter, RouterProvider, } from "react-router-dom";
 import NewCita from "./Routes/NewCita";
@@ -43,10 +45,24 @@ const App = () => {
                 </ProtectedRoute>,
         },
         {
-            path: '/Citas',
+            path: '/BookingToday',
             element: 
                 <ProtectedRoute isAllowed={!!user && user.roles.includes('ROLE_EMPLEADO')}>
-                    <Citas />
+                    <BookingToday />
+                </ProtectedRoute>,
+        },
+        {
+            path: '/BookingPending',
+            element: 
+                <ProtectedRoute isAllowed={!!user && user.roles.includes('ROLE_EMPLEADO')}>
+                    <BookingPending />
+                </ProtectedRoute>,
+        },
+        {
+            path: '/BookingConfirmed',
+            element: 
+                <ProtectedRoute isAllowed={!!user && user.roles.includes('ROLE_EMPLEADO')}>
+                    <BookingConfirmed />
                 </ProtectedRoute>,
         },
     ]);

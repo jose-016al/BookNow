@@ -29,6 +29,9 @@ class Booking
     #[ORM\ManyToOne(inversedBy: 'bookings')]
     private ?User $user = null;
 
+    #[ORM\Column]
+    private ?int $status = 1;
+
     public function __construct()
     {
         $this->date = new \DateTime();
@@ -96,6 +99,18 @@ class Booking
     public function setUser(?user $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getStatus(): ?int
+    {
+        return $this->status;
+    }
+
+    public function setStatus(int $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

@@ -18,7 +18,7 @@ const GetBookingDate = ({ date, onbookingDate }) => {
             const url = "http://localhost:8000/api/bookings";
             const respuesta = await fetch(url);
             const json = await respuesta.json();
-            const bookingsFiltrados = json.filter(booking => booking.date.date.split(' ')[0] === formattedDate);
+            const bookingsFiltrados = json.filter(booking => booking.date.date.split(' ')[0] === formattedDate && booking.status === 2);
             onbookingDate(bookingsFiltrados);
         }
         catch (error) {

@@ -1,25 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import GetBookingTimes from './GetBookingDate';
 
 const Time = ({ date, onTimeChange }) => {
 
-    const [bookings, setBookings] = useState([]);
     const [selectedTime, setSelecteTime] = useState("");
-    const [times, setTimes] = useState([]);
     const [horasDisponibles, sethorasDisponibles] = useState([]);
 
     const horas = [
-        '08:00', '08:15', '08:30', '08:45', '09:00', '09:15', '09:30', '09:45',
-        '10:00', '10:15', '10:30', '10:45', '11:00', '11:15', '11:30', '11:45',
-        '12:00', '12:15', '12:30', '12:45', '13:00', '13:15', '13:30', '13:45',
-        '17:00', '17:15', '17:30', '17:45', '18:00', '18:15', '18:30', '18:45',
-        '19:00', '19:15', '19:30', '19:45', '20:00', '20:15', '20:30', '20:45',
+        '09:00', '09:15', '09:30', '09:45', '10:00', '10:15', '10:30', '10:45',
+        '11:00', '11:15', '11:30', '11:45', '12:00', '12:15', '12:30', '12:45',
+        '13:00', '13:15', '13:30', '13:45', '17:00', '17:15', '17:30', '17:45',
+            '18:00', '18:15', '18:30', '18:45', '19:00', '19:15', '19:30',
     ];
 
     const handleBookingChange = (booking) => {
-        setBookings(booking);
-        setTimes(booking.map(bookingItem => bookingItem.time.date));
-
         const horasFiltradas = filterAvailableHours(booking);
         sethorasDisponibles(horasFiltradas);
     };
