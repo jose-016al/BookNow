@@ -7,6 +7,7 @@ import Time from '../Components/Time';
 import AuthContext from '../Contexts/AuthContext.js';
 import 'react-calendar/dist/Calendar.css';
 import axios from 'axios';
+import { Navigate } from 'react-router-dom';
 
 const NewCita = () => {
 
@@ -17,6 +18,11 @@ const NewCita = () => {
     const [type, setType] = useState(null);
     const [duration, setDuration] = useState(null);
     const user_id = getUserId();
+
+    const [errorMessageType, setErrorMessageType] = useState("");
+    const [errorMessageTime, setErrorMessageTime] = useState("");
+
+    const [isBooking, setIsBooking] = useState(false);
 
     const handleDateChange = (date) => {
         setDate(date);
@@ -36,19 +42,33 @@ const NewCita = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const formattedDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
-        const data = { user_id, type, date: formattedDate, time, duration };
-        try {
-            const response = await axios.post('http://localhost:8000/api/newBooking', JSON.stringify(data), {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            console.log(response.data);
-        } catch (error) {
-            console.error(error.response.data);
+
+        if (type.length === 0 || !time) {
+            console.log(type);
+            setErrorMessageType((type.length === 0) ? 'Debes seleccionar un tipo de cita' : '');
+            setErrorMessageTime(!time ? 'Debes seleccionar una hora' : '');
+            console.log(errorMessageType);
+        } else {
+            const data = { user_id, type, date: formattedDate, time, duration };
+            try {
+                const response = await axios.post('http://localhost:8000/api/newBooking', JSON.stringify(data), {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                console.log(response.data);
+                setIsBooking(true);
+            } catch (error) {
+                console.error(error.response.data);
+            }
         }
+
     }
     
+    if (isBooking) {
+        return <Navigate to="/Login" replace={true} />;
+    }
+
     return (
         <>
             <Header />
@@ -62,8 +82,10 @@ const NewCita = () => {
                         )}
                         <GetBookingTypes bookingTypes={handleBookingTypes} />
                         <div className="mb-2">
+                            {errorMessageType && <div className="error text-danger">{errorMessageType}</div>}
                             <label>Selecciona una hora</label>
                             <Time date={date} onTimeChange={handleTimeChange} />
+                            {errorMessageTime && <div className="error text-danger">{errorMessageTime}</div>}
                         </div>
                         <div className="d-grid mb-3">
                             <button className="btn btn-primary" type="submit">Solicitar cita</button>

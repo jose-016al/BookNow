@@ -32,7 +32,7 @@ const Nav = () => {
                             <li><Link className='enlace' to={`/newcita`}>Pedir cita</Link></li>
                             {user.roles.includes("ROLE_EMPLEADO") &&
                                 <li className={`${showNavBooking ? 'active' : ''}`}>
-                                    <Link className='enlace' onClick={handleShowBooking}>
+                                    <div className='enlace' onClick={handleShowBooking}>
                                         <div className="menu-item">
                                             <p>Citas</p>
                                             <p id='img'></p>
@@ -42,7 +42,7 @@ const Nav = () => {
                                             <li><Link className='enlace' to={`/bookingpending`}>Citas pendientes</Link></li>
                                             <li><Link className='enlace' to={`/bookingconfirmed`}>Citas confirmadas</Link></li>
                                         </ul>
-                                    </Link>
+                                    </div>
                                 </li>
                             }
                             <li><Link className='enlace' onClick={handleLogOut}>Cerrar sesión</Link></li>

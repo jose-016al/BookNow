@@ -45,6 +45,7 @@ header nav ul li .enlace {
     padding: 10px;
     border-radius: 20px;
     display: block;
+    cursor: pointer;
     transition: color 0.5s, background-color 0.5s;
 }
 header nav ul li .enlace:hover {
@@ -85,7 +86,7 @@ header nav ul li .enlace .nav-booking {
     border-bottom-right-radius: 25px;
     right: 10%;
     opacity: 0;
-    transition: transform 2s, opacity 3s;
+    transition: transform 1s, opacity 1s;
     transform: translateY(-200px);
 }
 
