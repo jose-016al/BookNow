@@ -126,7 +126,7 @@ header nav ul li .enlace .nav-booking.active {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 700px;
 }
 
 /* Estilos para el botón hamburguesa */
@@ -245,8 +245,9 @@ header nav ul li .enlace .nav-booking.active {
   z-index: 1;
 }
 
-.cita-pasada {
-  text-decoration: line-through;
+.selectTypeBooking.active {
+  background-color: #3162ac;
+  color: white;
 }
 
 /* ====================

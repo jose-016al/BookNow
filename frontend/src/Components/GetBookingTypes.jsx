@@ -43,7 +43,7 @@ const GetBookingTypes = ({ bookingTypes }) => {
             {types && (
                 <select className='form-select form-select-sm' multiple value={selectedTypes} onChange={handleTypesChange}>
                     {types.map((type, index) => (
-                        <option key={index} value={type.type}>
+                        <option key={index} value={type.type} className={`selectTypeBooking ${selectedTypes.some((selectedType) => selectedType.type === type.type) ? 'active' : ''}`}>
                             {type.type}
                         </option>
                     ))}
