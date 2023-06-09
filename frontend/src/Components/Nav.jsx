@@ -10,6 +10,7 @@ const Nav = () => {
 
     const [clicked, setClicked] = useState(false)
     const [showNavBooking, setShowNavBooking] = useState(false);
+    const [showNavUser, setShowNavUserg] = useState(false);
 
     const handleClick = () => {
         setClicked(!clicked)
@@ -17,6 +18,10 @@ const Nav = () => {
 
     const handleShowBooking = () => {
         setShowNavBooking(!showNavBooking);
+    };
+
+    const handleShowUser = () => {
+        setShowNavUserg(!showNavUser);
     };
 
     return (
@@ -45,7 +50,19 @@ const Nav = () => {
                                     </div>
                                 </li>
                             }
-                            <li><Link className='enlace' onClick={handleLogOut}>Cerrar sesión</Link></li>
+                            <li className={`${showNavUser ? 'active' : ''}`}>
+                                <div className='enlace' onClick={handleShowUser}>
+                                    <div className="menu-item">
+                                        <p>{ user.name + " " + user.last_name }</p>
+                                        <p id='img'></p>
+                                    </div>
+                                    <ul className={`nav-user ${showNavUser ? 'active' : ''}`}>
+                                        <li><Link className='enlace' to={`/bookinguser`}>Tus citas</Link></li>
+                                        <li><Link className='enlace' to={`/bookingpending`}>Editar perfil</Link></li>
+                                        <li><Link className='enlace' onClick={handleLogOut}>Cerrar sesión</Link></li>
+                                    </ul>
+                                </div>
+                            </li>
                             {user.roles.includes("ROLE_ADMIN") && 
                                 <li><a className='enlace' href="http://localhost:8000/admin" target="_blank" rel="noopener noreferrer">Admin</a></li>
                             } 

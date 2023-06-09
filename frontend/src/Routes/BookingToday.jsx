@@ -8,12 +8,12 @@ const BookingToday = () => {
     const dateNow = new Date();
     const formattedDate = `${dateNow.getDate()}/${(dateNow.getMonth() + 1).toString().padStart(2, '0')}/${dateNow.getFullYear().toString().padStart(2, '0')}`;
 
-    useEffect( () => {
-        const interval = setInterval(
-            () => fetchDatos(), 1000
-        );
+    useEffect(() => {
+        const interval = setInterval(() => {
+            fetchDatos();
+        }, 1000);
         return () => clearInterval(interval);
-    });
+    }, []);
 
     const fetchDatos = async () => {
         try {

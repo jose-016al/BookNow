@@ -72,7 +72,7 @@ const NewCita = () => {
     return (
         <>
             <Header />
-            <div className='container mt-4' style={{ minHeight: '310px' }}>
+            <div className='container mt-4' style={{ minHeight: '600px' }}>
                 <h2>Escoge el dia de tu cita</h2>
                 <div className='row justify-content-center mt-4'>
                     <Calender onDateChange={handleDateChange} />

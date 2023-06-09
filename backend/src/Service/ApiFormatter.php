@@ -33,6 +33,7 @@ class ApiFormatter
             'status' => $booking->getStatus(),
             'name' => $booking->getUser()->getName(),
             'last_name' => $booking->getUser()->getLastName(),
+            'userId' => $booking->getUser()->getId(),
         );
         
         return $bookingJSON;

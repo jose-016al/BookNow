@@ -114,7 +114,7 @@ const Home = () => {
                 </div>
                 <div className='col-12 col-md-10 mt-4 border-top'>
                     <h2>¿Donde nos encontrmaos?</h2>
-                    <div className='text-center'><iframe title="Ubicación de la peluquería" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3179.649270361915!2d-3.5896577248530153!3d37.161038347277376!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd71fca96f756d51%3A0x709bb607e44fcffc!2sC.%20Jos%C3%A9%20Tamayo%2C%208%2C%2018008%20Granada!5e0!3m2!1ses!2ses!4v1686336497587!5m2!1ses!2ses" width="600" height="450" style={{ border: 0 }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" ></iframe></div>
+                    <div className='text-center'><iframe title="Ubicación de la peluquería" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3179.649270361915!2d-3.5896577248530153!3d37.161038347277376!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd71fca96f756d51%3A0x709bb607e44fcffc!2sC.%20Jos%C3%A9%20Tamayo%2C%208%2C%2018008%20Granada!5e0!3m2!1ses!2ses!4v1686336497587!5m2!1ses!2ses" width="100%" height="450" style={{ border: 0 }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" ></iframe></div>
                 </div>
             </div>
             <Footer />

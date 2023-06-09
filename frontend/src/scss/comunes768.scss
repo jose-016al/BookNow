@@ -1,11 +1,15 @@
 @media (max-width: 768px) {
 
     header h1 {
-        z-index: 3;
+        z-index: 4;
     }
 
     #banner {
         height: 200px;
+    }
+
+    #banner > h4 {
+        font-size: 30px;
     }
 
     .navbar-burger {
@@ -18,7 +22,7 @@
         top: -700px;
         left: -2000px;
         right: 0;
-        z-index: 3;
+        z-index: 4;
         margin-left: auto;
         margin-right: auto;
         text-align: center;
@@ -26,18 +30,18 @@
     }
 
     .navbar-bg {
-        z-index: 2;
+        z-index: 3;
     }
 
     .navbar-burger {
-        z-index: 3;
+        z-index: 4;
     }
 
     header nav .active {
         display: block;
         margin-left: auto;
         margin-right: auto;
-        top: 200px;
+        top: 25%;
         left: 0;
         right: 0;
         text-align: center;
@@ -61,11 +65,13 @@
     }
 
     #formNewCita {
-        margin-top: 20px;
+        margin-top: 80px;
+        margin-bottom: 30px;
+        transform: translateX(0%);
+        transition: all 2s ease-in-out;
     }
 
     #formNewCita.active {
-        position: static;
         opacity: 1;
         transform: none;
         top: 65%;
@@ -80,6 +86,18 @@
     }
 
     header nav ul li .enlace .nav-booking li .enlace {
+        font-size: 23px;
+    }    
+
+    header nav ul li .enlace .nav-user {
+        width: 50%;
+        top: 75%;
+        right: 0%;
+        border-bottom-right-radius: 150px;
+        transform: translateY(-20px);
+    }
+
+    header nav ul li .enlace .nav-user li .enlace {
         font-size: 23px;
     }    
 

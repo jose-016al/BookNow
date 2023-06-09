@@ -1,4 +1,5 @@
 @import url('//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
+@import url('https://fonts.googleapis.com/css?family=Dancing+Script');
     /* ====================
             VARIABLES
     ==================== */
@@ -6,6 +7,7 @@ $primaryColor: #222831;
 $secondaryColor: #393E46;
 $backgroundColor: #00ADB5;
 $textColor: #EEEEEE;
+$titleBanner: 'Dancing Script', sans-serif;
 
     /* ====================
             HEADER
@@ -73,14 +75,14 @@ header nav ul li .enlace .nav-booking {
     flex-direction: column;
     list-style: none;
     position: absolute;
-    background-color: $primaryColor;
+    background-color: $secondaryColor;
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
-    right: 10%;
+    right: 15%;
     opacity: 0;
     z-index: 3;
     transform: translateY(-200px);
-    transition: opacity 3s, transform 1s;
+    transition: opacity 1s, transform 1s;
 }
 
 header nav ul li .enlace .nav-booking.active {
@@ -98,6 +100,40 @@ header nav ul li .enlace .nav-booking li .enlace {
 }
 
 header nav ul li .enlace .nav-booking li .enlace:hover {
+    background-color: $textColor;
+    color: black;
+}
+
+header nav ul li .enlace .nav-user {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    position: absolute;
+    background-color: $secondaryColor;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    right: 0%;
+    opacity: 0;
+    z-index: 3;
+    transform: translateY(-200px);
+    transition: opacity 1s, transform 1s;
+}
+
+header nav ul li .enlace .nav-user.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+header nav ul li .enlace .nav-user li .enlace {
+    color: $textColor;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 10px;
+    display: block;
+    transition: color 0.5s, background-color 0.5s;
+}
+
+header nav ul li .enlace .nav-user li .enlace:hover {
     background-color: $textColor;
     color: black;
 }
@@ -206,6 +242,8 @@ header nav ul li .enlace .nav-booking li .enlace:hover {
 
 #banner > h4 {
     color: $textColor;
+    font-family: $titleBanner;
+    font-size: 70px;
 }
 
 .slide-item {
@@ -259,6 +297,7 @@ header nav ul li .enlace .nav-booking li .enlace:hover {
     transition: all 2s ease-in-out;
     transform: translateX(0%);
     width: 40%;
+    z-index: 2;
 }
 
 #calender.active {
@@ -269,17 +308,15 @@ header nav ul li .enlace .nav-booking li .enlace:hover {
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
     position: absolute;
     top: 25%;
-    transform: translateX(0%);
+    transform: translateX(-100%);
     opacity: 0;
-    z-index: -1;
-    transition: all 2s ease-in-out;
+    transition: opacity 3s ease-in, transform 2s ease-in;
 }
 
 #formNewCita.active {
     position: none;
     opacity: 1;
     transform: translateX(60%);
-    z-index: 1;
 }
 
 .selectTypeBooking.active {

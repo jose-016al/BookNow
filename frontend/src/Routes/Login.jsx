@@ -56,7 +56,7 @@ const Login = ({ onUserChange }) => {
                             {errorMessagePassword && <div className="error text-danger">{errorMessagePassword}</div>}
                         </div>
                         <div className="d-grid">
-                            <button className="btn btn-primary" type="submit">Iniciar sesion</button>
+                            <button id='btn-color' className="btn" type="submit">Iniciar sesion</button>
                         </div>
                         <div className="my-3">
                             <span>¿No tienes cuenta? <Link to={`/Register`}>Crea tu cuenta</Link></span>

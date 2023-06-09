@@ -118,7 +118,7 @@ const Register = () => {
                                 <span>¿Volver al login? <Link to={`/Login`}>Login</Link></span>
                             </div>
                             <div className='col-12 col-md-6 my-3 d-flex justify-content-end'>
-                                <button className=" btn btn-primary" type="submit">Crear cuenta</button>
+                                <button id='btn-color' className=" btn" type="submit">Crear cuenta</button>
                             </div>
                         </div>
                     </form>
