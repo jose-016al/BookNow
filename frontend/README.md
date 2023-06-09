@@ -5,6 +5,7 @@
 - [Rutas](#rutas)
 - [Instalacion de Boostrap y SASS](#instalacion-de-bootstrap-y-sass)
 - [Consultas a la API](#consultas-a-la-api)
+- [Brevo](#Brevo)
 
 # Creacion del proyecto
 Para la creacion de la parte del frontend creamos un proyecot de React
@@ -204,3 +205,7 @@ const handleSubmit = async (event) => {
         }
     }
 ```
+
+# Brevo
+[Brevo]('https://developers.brevo.com/') es una plataforma que nos proporciona una API, que nos permite enviar mensajes por correo electronico, una vez nos registremos podremos crear nuestros keys para usar la API.    
+Documentacion: [Brevo-docs]('https://developers.brevo.com/docs/getting-started')

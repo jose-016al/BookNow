@@ -41,7 +41,7 @@ const Login = ({ onUserChange }) => {
     return (
         <>
             <Header />
-            <div className='container'>
+            <div className='container' style={{ minHeight: '310px' }}>
                 <div className='row justify-content-center'>
                     <h2 className='text-center mb-4 mt-4'>Login</h2>
                     <form className='col-12 col-md-4' id='containerLogin' onSubmit={handleSubmit} >

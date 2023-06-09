@@ -44,7 +44,7 @@ const BookingConfirmed = () => {
     return (
         <>
             <Header />
-            <div className='container mt-4'>
+            <div className='container mt-4' style={{ minHeight: '310px' }}>
                 <h2>Citas confirmadas</h2>
                 <div className='mt-4 row justify-content-center align-items-center'>
                     {confirmed && confirmed.length > 0 ? (

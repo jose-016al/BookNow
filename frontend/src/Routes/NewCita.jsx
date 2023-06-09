@@ -72,7 +72,7 @@ const NewCita = () => {
     return (
         <>
             <Header />
-            <div className='container mt-4'>
+            <div className='container mt-4' style={{ minHeight: '310px' }}>
                 <h2>Escoge el dia de tu cita</h2>
                 <div className='row justify-content-center mt-4'>
                     <Calender onDateChange={handleDateChange} />
@@ -88,7 +88,7 @@ const NewCita = () => {
                             {errorMessageTime && <div className="error text-danger">{errorMessageTime}</div>}
                         </div>
                         <div className="d-grid mb-3">
-                            <button className="btn btn-primary" type="submit">Solicitar cita</button>
+                            <button id='btn-color' className="btn" type="submit">Solicitar cita</button>
                         </div>
                     </form>
                 </div>

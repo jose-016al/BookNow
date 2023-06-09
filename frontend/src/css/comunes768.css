@@ -1,4 +1,7 @@
 @media (max-width: 768px) {
+  header h1 {
+    z-index: 3;
+  }
   .navbar-burger {
     display: block;
   }
@@ -8,10 +11,17 @@
     top: -700px;
     left: -2000px;
     right: 0;
+    z-index: 3;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
     transition: all 0.5s ease;
+  }
+  .navbar-bg {
+    z-index: 2;
+  }
+  .navbar-burger {
+    z-index: 3;
   }
   header nav .active {
     display: block;
@@ -37,7 +47,6 @@
   }
   #formNewCita {
     margin-top: 20px;
-    margin-bottom: 50px;
   }
   #formNewCita.active {
     position: static;
@@ -51,5 +60,14 @@
     right: 0%;
     border-bottom-right-radius: 150px;
     transform: translateY(-20px);
+  }
+  header nav ul li .enlace .nav-booking li .enlace {
+    font-size: 23px;
+  }
+  #footer {
+    height: 450px;
+  }
+  #social-media ul li {
+    height: 40px;
   }
 }/*# sourceMappingURL=comunes768.css.map */

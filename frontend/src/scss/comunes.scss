@@ -1,32 +1,25 @@
+@import url('//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
     /* ====================
             VARIABLES
     ==================== */
-$color-primary: rgba(0, 0, 0);
-$color-primary-transparent: rgba(0, 0, 0, 0.95);
+$primaryColor: #222831;
+$secondaryColor: #393E46;
+$backgroundColor: #00ADB5;
+$textColor: #EEEEEE;
 
     /* ====================
             HEADER
     ==================== */
-body {
-    background-color: #ffffff;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'%3E%3Cdefs%3E%3ClinearGradient id='a' x1='0' x2='0' y1='1' y2='0'%3E%3Cstop offset='0' stop-color='%230FF'/%3E%3Cstop offset='1' stop-color='%23CF6'/%3E%3C/linearGradient%3E%3ClinearGradient id='b' x1='0' x2='0' y1='0' y2='1'%3E%3Cstop offset='0' stop-color='%23F00'/%3E%3Cstop offset='1' stop-color='%23FC0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg fill='%23FFF' fill-opacity='0' stroke-miterlimit='10'%3E%3Cg stroke='url(%23a)' stroke-width='2'%3E%3Cpath transform='translate(0 0)' d='M1409 581 1450.35 511 1490 581z'/%3E%3Ccircle stroke-width='4' transform='rotate(0 800 450)' cx='500' cy='100' r='40'/%3E%3Cpath transform='translate(0 0)' d='M400.86 735.5h-83.73c0-23.12 18.74-41.87 41.87-41.87S400.86 712.38 400.86 735.5z'/%3E%3C/g%3E%3Cg stroke='url(%23b)' stroke-width='4'%3E%3Cpath transform='translate(0 0)' d='M149.8 345.2 118.4 389.8 149.8 434.4 181.2 389.8z'/%3E%3Crect stroke-width='8' transform='rotate(0 1089 759)' x='1039' y='709' width='100' height='100'/%3E%3Cpath transform='rotate(0 1400 132)' d='M1426.8 132.4 1405.7 168.8 1363.7 168.8 1342.7 132.4 1363.7 96 1405.7 96z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    background-attachment: fixed;
-    background-size: cover;
-    position: relative;
-    min-height: 100vh;
-}
 header {
-    background-color: $color-primary;
+    background-color: $primaryColor;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    
 }
 
 header h1 {
-    color: white;
+    color: $textColor;
     padding-left: 50px;
-    z-index: 3;
 }
 
 header nav ul {
@@ -35,11 +28,10 @@ header nav ul {
     align-items: center;
     margin: 10px 50px 10px 10px;
     padding: 0px;
-    z-index: 3;
 }
 
 header nav ul li .enlace {
-    color: white;
+    color: $textColor;
     text-decoration: none;
     font-size: 20px;
     padding: 10px;
@@ -50,7 +42,7 @@ header nav ul li .enlace {
 }
 header nav ul li .enlace:hover {
     color: black;
-    background-color: white;
+    background-color: $textColor;
 }
 
     // Menu desplegable de las citas
@@ -81,17 +73,23 @@ header nav ul li .enlace .nav-booking {
     flex-direction: column;
     list-style: none;
     position: absolute;
-    background-color: $color-primary;
+    background-color: $primaryColor;
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
     right: 10%;
     opacity: 0;
-    transition: transform 1s, opacity 1s;
+    z-index: 3;
     transform: translateY(-200px);
+    transition: opacity 3s, transform 1s;
+}
+
+header nav ul li .enlace .nav-booking.active {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 header nav ul li .enlace .nav-booking li .enlace {
-    color: white;
+    color: $textColor;
     text-decoration: none;
     font-size: 20px;
     padding: 10px;
@@ -100,26 +98,20 @@ header nav ul li .enlace .nav-booking li .enlace {
 }
 
 header nav ul li .enlace .nav-booking li .enlace:hover {
-    background-color: white;
+    background-color: $textColor;
     color: black;
-}
-  
-header nav ul li .enlace .nav-booking.active {
-    opacity: 1;
-    transform: translateY(0);
 }
 
     /* ====================
             NAV burguer
     ==================== */
 .navbar-bg {
-    background-color: $color-primary-transparent;
+    background-color: $secondaryColor;
     position: absolute;
     top: -1000px;
     left: -1000px;
     width: 100%;
     height: 100%;
-    z-index: 2;
     transition: all .6s ease;
 }
 
@@ -134,7 +126,6 @@ header nav ul li .enlace .nav-booking.active {
     /* Estilos para el botón hamburguesa */
 .navbar-burger {
     position: relative;
-    z-index: 3;
     display: none;
     margin-right: 25px;
 }
@@ -149,7 +140,7 @@ header nav ul li .enlace .nav-booking.active {
 }
 
 .nav-icon-5 span {
-    background-color: #fff;
+    background-color: $textColor;
     position: absolute;
     border-radius: 2px;
     transition: .3s cubic-bezier(.8, .5, .2, 1.4);
@@ -201,6 +192,36 @@ header nav ul li .enlace .nav-booking.active {
 }
 
     /* ====================
+            HOME
+    ==================== */
+#banner {
+    height: 500px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../img/salon.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: grid;
+    place-items: center;
+}
+
+#banner > h4 {
+    color: $textColor;
+}
+
+.services-images {
+    display: flex;
+    animation: scroll-banner 20s linear infinite;
+}
+
+.services-images img {
+    width: 25%; 
+    // height: 250px; 
+    object-fit: cover; 
+    margin: 0 10px; 
+}
+
+
+    /* ====================
             LOGIN Y REGISTRO
     ==================== */
 #containerLogin {
@@ -248,21 +269,27 @@ header nav ul li .enlace .nav-booking.active {
 }
 
 .selectTypeBooking.active {
-    background-color: #3162ac;
-    color: white;
+    background-color: $primaryColor;
+    color: $textColor;
+}
+
+#btn-color {
+    background-color: $primaryColor;
+    color: $textColor;
 }
 
     /* ====================
             BookingPending
     ==================== */
+
 #imgbookingsPending {
     display: flex;
     justify-content: center;
 }
+
 #imgbookingsPending > img {
     padding: 0px 5px 0px 5px;
 }
-
 
     /* ====================
             404 page
@@ -307,10 +334,138 @@ header nav ul li .enlace .nav-booking.active {
             FOOTER
     ==================== */
 #footer {
-    position: absolute;
-
+    position: relative;
     bottom: 0;
     width: 100%;
-    background-color: $color-primary;
-    color: white;
+    margin: 0;
+    background-color: $primaryColor;
+    padding: 20px;
+    height: 167px;
+    margin-top: 100px;
+    color: $textColor;
+}
+
+#footer #nav-footer ul {
+    list-style: none;
+    padding: 0px;
+}
+
+#footer #nav-footer ul li {
+    text-decoration: underline;
+}
+
+#footer #nav-footer ul li .enlace {
+    color: $textColor;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 5px 0px 5px 5px;
+    display: block;
+    cursor: pointer;
+    transition: color 0.5s, background-color 0.5s;
+}
+
+#footer #nav-footer ul li .enlace:hover {
+    text-decoration: underline;
+}
+
+    // Menu de redes sociales: creditos a @web_beks
+#social-media ul {
+    position: relative;
+    display: flex;
+    transform: rotate(-10deg) skew(20deg);
+    transform-style: preserve-3d;
+    margin: 0;
+    padding: 0;
+}
+
+#social-media ul li {
+    position: relative;
+    list-style: none;
+    width: 100%;
+    height: 30px;
+    margin: 0px 20px;
+}
+
+#social-media ul li:before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: -5px;
+    width: 100%;
+    height: 10px;
+    background: #2a2a2a;
+    transform: skewX(-41deg);
+}
+
+#social-media ul li:after {
+    content: '';
+    position: absolute;
+    top:5px;
+    left: -9px;
+    width: 9px;
+    height: 100%;
+    background: #2a2a2a;
+    transform: skewY(-49deg);
+}
+
+#social-media ul li span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex !important;
+    background: #2a2a2a;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 30px !important;
+    transition: 1.5s ease-out;
+}
+
+#social-media ul li:hover span {
+    z-index: 1000;
+    transition: .3s;
+    color: #fff;
+    box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+#social-media ul li:hover span:nth-child(5) {
+    transform: translate(40px, -40px);
+    opacity: 1;
+}
+
+#social-media ul li:hover span:nth-child(4) {
+    transform: translate(30px, -30px);
+    opacity: .8;
+}
+
+#social-media ul li:hover span:nth-child(3) {
+    transform: translate(20px, -20px);
+    opacity: .6;
+}
+
+#social-media ul li:hover span:nth-child(2) {
+    transform: translate(10px, -10px);
+    opacity: .4;
+}
+
+#social-media ul li:hover span:nth-child(1) {
+    transform: translate(0px, 0px);
+    opacity: .2;
+}
+
+#social-media ul li:nth-child(1):hover span {
+    background: #52E19F !important;
+}
+
+#social-media ul li:nth-child(2):hover span {
+    background: #2C3456 !important;
+}
+
+#social-media ul li:nth-child(3):hover span {
+    background: #EA6E96 !important;
+}
+
+#social-media ul li:nth-child(4):hover span {
+    background: #FCEB00 !important;
 }

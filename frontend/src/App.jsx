@@ -13,6 +13,10 @@ import AuthContext from "./Contexts/AuthContext.js";
 import { createBrowserRouter, RouterProvider, } from "react-router-dom";
 import NewCita from "./Routes/NewCita";
 
+const styles = {
+    backgroundColor: '#EEEEEE'
+};
+
 const App = () => {
 
     const { user, handleUserChange } = useContext(AuthContext);
@@ -65,17 +69,12 @@ const App = () => {
                     <BookingConfirmed />
                 </ProtectedRoute>,
         },
-        {
-            path: '/admin',
-            element: 
-                <ProtectedRoute isAllowed={!!user && user.roles.includes('ROLE_ADMIN')}>
-                    {/* --esto es solo para evitar que otros usuarios accedan a admin-- */}
-                </ProtectedRoute>,
-        },
     ]);
 
     return (
-        <RouterProvider router={router} />
+        <div style={styles}>
+            <RouterProvider router={router} />
+        </div>
     );
 }
 

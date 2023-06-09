@@ -48,7 +48,7 @@ const BookingToday = () => {
     return (
         <>
             <Header />
-            <div className='container row justify-content-center mx-auto mt-4'>
+            <div className='container row justify-content-center mx-auto mt-4' style={{ minHeight: '310px' }}>
                 <h2>Las citas de hoy { formattedDate }</h2>
                 <div className='mt-4 col-11 col-md-6' id='containerCita'>
                     {bookingNow && bookingNow.length > 0 ? (
