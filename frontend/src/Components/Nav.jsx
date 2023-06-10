@@ -58,7 +58,7 @@ const Nav = () => {
                                     </div>
                                     <ul className={`nav-user ${showNavUser ? 'active' : ''}`}>
                                         <li><Link className='enlace' to={`/bookinguser`}>Tus citas</Link></li>
-                                        <li><Link className='enlace' to={`/bookingpending`}>Editar perfil</Link></li>
+                                        <li><Link className='enlace' to={`/edituser`}>Editar perfil</Link></li>
                                         <li><Link className='enlace' onClick={handleLogOut}>Cerrar sesión</Link></li>
                                     </ul>
                                 </div>

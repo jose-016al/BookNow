@@ -13,7 +13,7 @@ const Register = () => {
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
     const [isRegistered, setIsRegistered] = useState(false);
-    // Errores del formulario
+        // Errores del formulario
     const [errorMessageName, setErrorMessageName] = useState("");
     const [errorMessageLastName, setErrorMessageLastName] = useState("");
     const [errorMessageEmail, setErrorMessageEmail] = useState("");

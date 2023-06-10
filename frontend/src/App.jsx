@@ -10,6 +10,7 @@ import BookingToday from "./Routes/BookingToday";
 import BookingPending from "./Routes/BookingPending";
 import BookingConfirmed from "./Routes/BookingConfirmed";
 import BookingUser from "./Routes/BookingUser";
+import EditUser from "./Routes/EditUser";
 import AuthContext from "./Contexts/AuthContext.js";
 import { createBrowserRouter, RouterProvider, } from "react-router-dom";
 import NewCita from "./Routes/NewCita";
@@ -75,6 +76,13 @@ const App = () => {
             element:
                 <ProtectedRoute isAllowed={user ? true : false} >
                     <BookingUser />
+                </ProtectedRoute>,
+        },
+        {
+            path: '/EditUser',
+            element:
+                <ProtectedRoute isAllowed={user ? true : false} >
+                    <EditUser />
                 </ProtectedRoute>,
         },
     ]);

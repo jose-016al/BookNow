@@ -47,7 +47,7 @@ const Home = () => {
             <Header />
             <div className='container-fluid mx-auto row justify-content-center'>
                 <div className='col-11 col-md-10 mt-5' id='banner'>
-                    <h4 class="text-center">Descubre el poder de un nuevo look</h4>
+                    <h4 className="text-center">Descubre el poder de un nuevo look</h4>
                 </div>
                 <div className='col-12 col-md-10 mt-4 border-top'>
                     <h2>¿Quienes somos?</h2>

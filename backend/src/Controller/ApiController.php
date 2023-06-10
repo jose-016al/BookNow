@@ -74,6 +74,30 @@ class ApiController extends AbstractController
         return new JsonResponse($userJSON, 201);
     }
 
+    #[Route('/editUser', name: 'app_api_edit_user', methods: ["POST"])]
+    public function editUser(Request $request, UserRepository $userRepository, Apiformatter $apiFormatter, ManagerRegistry $doctrine): JsonResponse
+    {
+        $entityManager = $doctrine->getManager();
+
+            // Obtener los datos de la petición POST
+        $data = json_decode($request->getContent(), true);
+
+            // Buscar al usuario en la base de datos por su email
+        $user = $userRepository->findOneBy(['email' => $data['email']]);
+
+        $user->setEmail($data['email']);
+        $user->setName($data['name']);
+        $user->setLastName($data['last_name']);
+        $user->setPhone($data['phone']);
+        
+            // Guardar los cambios del usuario en la base de datos
+        $entityManager->flush();
+
+            // Devolver una respuesta al cliente React
+        $userJSON = $apiFormatter->users($user);
+        return new JsonResponse($userJSON, 201);
+    }
+
     #[Route('/bookings', name: 'app_api_booking', methods: ["GET"])]
     public function usersIndex(BookingRepository $bookingRepository, Apiformatter $apiFormatter): JsonResponse
     {

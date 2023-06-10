@@ -12,7 +12,10 @@ const BookingConfirmed = () => {
     const [confirmed, setConfirmed] = useState([]);
 
     useEffect(() => {
-        fetchDatos();
+        const interval = setInterval(() => {
+            fetchDatos();
+        }, 1000);
+        return () => clearInterval(interval);
     }, []);
 
     const fetchDatos = async () => {
@@ -22,7 +25,6 @@ const BookingConfirmed = () => {
             const json = await respuesta.json();
             const confirmadas = json.filter(booking => booking.status === 2);
             setConfirmed(confirmadas);
-            console.log(json[0].formatDate(json[0].date.date) + 'T' + formatTime(json[0].time.date));
         } catch (error) {
             console.log("error: " + error);
         }
@@ -54,7 +56,7 @@ const BookingConfirmed = () => {
         <>
             <Header />
             <div className='container mt-4' >
-                <h2>Citas confirmadas</h2>
+                <h2 className='text-center mb-4 mt-4'>Citas confirmadas</h2>
                 <div>
                     <Calendar
                         localizer={localizer}

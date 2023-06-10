@@ -47,7 +47,7 @@ const BookingPending = () => {
         <>
             <Header />
             <div className='container mt-4' style={{ minHeight: '310px' }}>
-                <h2>Citas pendientes</h2>
+                <h2 className='text-center mb-4 mt-4'>Citas pendientes</h2>
                 <div className='mt-4 row justify-content-center align-items-center'>
                     {pending && pending.length > 0 ? (
                         pending.map(cita => (

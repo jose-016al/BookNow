@@ -31,39 +31,39 @@ const Footer = () => {
             <div className='col-12 col-md-3' id='social-media'>
                 <ul>
                     <li>
-                        <a href="#hola">
+                        <a href="/">
                             <span></span>
                             <span></span>
                             <span></span>
                             <span></span>
-                            <span class="fa fa-facebook"></span>
+                            <span className="fa fa-facebook"></span>
                         </a>
                     </li>
                     <li>
-                        <a href="#hola">
+                        <a href="/">
                             <span></span>
                             <span></span>
                             <span></span>
                             <span></span>
-                            <span class="fa fa-twitter"></span>
+                            <span className="fa fa-twitter"></span>
                         </a>
                     </li>
                     <li>
-                        <a href="#hola">
+                        <a href="/">
                             <span></span>
                             <span></span>
                             <span></span>
                             <span></span>
-                            <span class="fa fa-instagram"></span>
+                            <span className="fa fa-instagram"></span>
                         </a>
                     </li>
                     <li>
-                        <a href="#hola">
+                        <a href="/">
                             <span></span>
                             <span></span>
                             <span></span>
                             <span></span>
-                            <span class="fa fa-linkedin"></span>
+                            <span className="fa fa-linkedin"></span>
                         </a>
                     </li>
                 </ul>
