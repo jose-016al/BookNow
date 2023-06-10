@@ -16,9 +16,9 @@ const Error404 = () => {
                                 <h1 className="text-center">404</h1>
                             </div>
                             <div className="contant_box_404">
-                                <h3 className="h2">Look like you`re lost</h3>
-                                <p>the page you are looking for not avaible!</p>
-                                <Link className="link_404" to={`/`}>Go to Home</Link>
+                                <h3 className="h2">Parece que estás perdido</h3>
+                                <p>¡La página que estás buscando no está disponible!</p>
+                                <Link className="link_404" to={`/`}>Volver a Home</Link>
                             </div>
                         </div>
                     </div>

@@ -11,7 +11,7 @@ const BookingToday = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             fetchDatos();
-        }, 1000);
+        }, 3000);
         return () => clearInterval(interval);
     }, []);
 
@@ -49,7 +49,7 @@ const BookingToday = () => {
         <>
             <Header />
             <div className='container row justify-content-center mx-auto mt-4' style={{ minHeight: '310px' }}>
-                <h2>Las citas de hoy { formattedDate }</h2>
+                <h2 className='text-center mb-4 mt-4'>Las citas de hoy { formattedDate }</h2>
                 <div className='mt-4 col-11 col-md-6' id='containerCita'>
                     {bookingNow && bookingNow.length > 0 ? (
                         <table className="table">

@@ -13,7 +13,7 @@ const BookingUser = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             fetchDatos();
-        }, 1000);
+        }, 3000);
         return () => clearInterval(interval);
     }, []);
 
@@ -51,7 +51,7 @@ const BookingUser = () => {
         <>
             <Header />
             <div className='container mt-4' style={{ minHeight: '310px' }}>
-                <h2>Proximas citas</h2>
+                <h2 className='text-center mb-4 mt-4'>Citas proximas</h2>
                 <div className='mt-4 row justify-content-center align-items-center'>
                     {bookingUser && bookingUser.length > 0 ? (
                         bookingUser.map(cita => (

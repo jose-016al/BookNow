@@ -5,6 +5,8 @@ namespace App\Repository;
 use App\Entity\Booking;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpClient\HttpClient;
 
 /**
  * @extends ServiceEntityRepository<Booking>
@@ -46,6 +48,33 @@ class BookingRepository extends ServiceEntityRepository
             ->addOrderBy('b.time', 'ASC')
             ->getQuery()
             ->getResult();
+    }
+
+    public function sendEmail(Booking $booking, $message): Response
+    {
+        $client = HttpClient::create();
+
+        $response = $client->request('POST', 'https://api.sendinblue.com/v3/smtp/email', [
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'api-key' => $_ENV['MAILER_KEY'],
+            ],
+            'json' => [
+                'sender' => [
+                    'name' => 'BookNow',
+                    'email' => 'no-reply@booknow.com',
+                ],
+                'to' => [
+                    [
+                        'name' => $booking->getUser()->getName(),
+                        'email' => $booking->getUser()->getEmail(),
+                    ],
+                ],
+                'subject' => 'Reserva',
+                'htmlContent' => $message,
+            ],
+        ]);
+        return new Response ($response->getContent());
     }
 
     //    /**

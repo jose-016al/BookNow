@@ -176,6 +176,12 @@ class ApiController extends AbstractController
         $booking->setStatus(2);
 
         $entityManager->flush();
+        
+        $message = $this->renderView('email/sendemail.html.twig', [
+            'booking' => $booking,
+        ]);
+
+        $bookingRepository->sendEmail($booking, $message);
 
         return new JsonResponse(['message' => 'Estado de reserva cambiado correctamente']);
     }
@@ -194,6 +200,12 @@ class ApiController extends AbstractController
         $booking->setStatus(0);
 
         $entityManager->flush();
+
+        $message = $this->renderView('email/sendemail.html.twig', [
+            'booking' => $booking,
+        ]);
+
+        $bookingRepository->sendEmail($booking, $message);
 
         return new JsonResponse(['message' => 'Cita cancelada correctamente']);
     }

@@ -73,7 +73,7 @@ const NewCita = () => {
         <>
             <Header />
             <div className='container mt-4' style={{ minHeight: '600px' }}>
-                <h2>Escoge el dia de tu cita</h2>
+                <h2 className='text-center mb-4 mt-4'>Escoge el dia de tu cita</h2>
                 <div className='row justify-content-center mt-4'>
                     <Calender onDateChange={handleDateChange} />
                     <form className={`col-11 col-md-3 ${date  ? 'active' : ''}`} id='formNewCita' onSubmit={handleSubmit}>

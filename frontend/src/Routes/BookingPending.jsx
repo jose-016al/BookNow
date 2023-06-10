@@ -11,7 +11,7 @@ const BookingPending = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             fetchDatos();
-        }, 1000);
+        }, 3000);
         return () => clearInterval(interval);
     }, []);
 
@@ -40,7 +40,7 @@ const BookingPending = () => {
         const time = new Date(timeString);
         const hora = time.getHours();
         const minutos = time.getMinutes();
-        return `${hora.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '1')}`;
+        return `${hora.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}`;
     };
 
     return (

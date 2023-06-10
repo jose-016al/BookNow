@@ -14,7 +14,7 @@ const BookingConfirmed = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             fetchDatos();
-        }, 1000);
+        }, 3000);
         return () => clearInterval(interval);
     }, []);
 

@@ -1,0 +1,9 @@
+{% if booking.status == 2 %}
+    <div>
+        <h1>Cita confirmada</h1>
+    </div>
+{% elseif booking.status == 0 %}
+    <div>
+        <h1>Cita cancelada</h1>
+    </div>
+{% endif %}
