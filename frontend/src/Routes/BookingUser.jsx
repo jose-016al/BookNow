@@ -31,7 +31,11 @@ const BookingUser = () => {
         }
     }
 
-
+    /**
+     * Se encarga de darle un formato a las fechas
+     * @param {string} dateString La cadena de texto que representara la fecha
+     * @returns La fecha formateada con "Y-m-d"
+     */
     const formatDate = (dateString) => {
         const date = new Date(dateString);
         const year = date.getFullYear();
@@ -40,6 +44,11 @@ const BookingUser = () => {
         return `${year}-${month}-${day}`;
     };
 
+    /**
+     * Se encarga de darle un formato a las horas 
+     * @param {string} timeString La cadena que representara la hora
+     * @returns La hora formeteada con "H:m"
+     */
     const formatTime = (timeString) => {
         const time = new Date(timeString);
         const hora = time.getHours();

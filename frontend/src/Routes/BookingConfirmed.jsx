@@ -30,6 +30,11 @@ const BookingConfirmed = () => {
         }
     };
 
+    /**
+     * Se encarga de darle un formato a las fechas
+     * @param {string} dateString La cadena de texto que representara la fecha
+     * @returns La fecha formateada con "Y-m-d"
+     */
     const formatDate = (dateString) => {
         const date = new Date(dateString);
         const year = date.getFullYear();
@@ -38,6 +43,11 @@ const BookingConfirmed = () => {
         return `${year}-${month}-${day}`;
     };
 
+    /**
+     * Se encarga de darle un formato a las horas 
+     * @param {string} timeString La cadena que representara la hora
+     * @returns La hora formeteada con "H:m:s"
+     */
     const formatTime = (timeString) => {
         const time = new Date(timeString);
         const hora = time.getHours();
@@ -46,6 +56,9 @@ const BookingConfirmed = () => {
         return `${hora.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
     };
 
+    /**
+     * Crea un array de eventos de calendario para las citas confirmadas
+     */
     const BookingsCalendar = confirmed.map(cita => ({
         title: `${cita.name} ${cita.last_name}`,
         start: new Date(formatDate(cita.date.date) + 'T' + formatTime(cita.time.date)),

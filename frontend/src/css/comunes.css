@@ -8,7 +8,7 @@
         HEADER
 ==================== */
 header {
-  background-color: #222831;
+  background-color: #1c2e47;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -315,12 +315,12 @@ header nav ul li .enlace .nav-user li .enlace:hover {
 }
 
 .selectTypeBooking.active {
-  background-color: #222831;
+  background-color: #1c2e47;
   color: #EEEEEE;
 }
 
 #btn-color {
-  background-color: #222831;
+  background-color: #1c2e47;
   color: #EEEEEE;
 }
 
@@ -383,7 +383,7 @@ header nav ul li .enlace .nav-user li .enlace:hover {
   bottom: 0;
   width: 100%;
   margin: 0;
-  background-color: #222831;
+  background-color: #1c2e47;
   padding: 20px;
   height: 167px;
   margin-top: 100px;

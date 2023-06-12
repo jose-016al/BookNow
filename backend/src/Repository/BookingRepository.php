@@ -41,6 +41,11 @@ class BookingRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * Obtiene todas las reservas ordenadas por fecha y hora
+     *
+     * @return Booking[] El array de reservas ordenadas
+     */
     public function findAllOrderedByDateTime(): array
     {
         return $this->createQueryBuilder('b')
@@ -50,6 +55,15 @@ class BookingRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    /**
+     * Envia un correo electrónico para una reserva utilizando la API de Sendinblue.
+     *
+     * @param Booking $booking
+     * @param string $message
+     * @param HttpClientInterface $client
+     *
+     * @return Response
+     */
     public function sendEmail(Booking $booking, $message): Response
     {
         $client = HttpClient::create();

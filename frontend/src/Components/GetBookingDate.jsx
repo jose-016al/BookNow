@@ -26,7 +26,6 @@ const GetBookingDate = ({ date, onbookingDate }) => {
         }
     }
 
-
 }
 
 export default GetBookingDate;

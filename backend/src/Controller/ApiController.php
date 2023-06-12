@@ -13,11 +13,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Doctrine\Persistence\ManagerRegistry;
-use Doctrine\ORM\EntityManagerInterface;
 
 #[Route('/api')]
 class ApiController extends AbstractController
 {
+
+        // Crea un nuevo usuario mediante una solicitud POST a /api/register
     #[Route('/register', name: 'app_api_register', methods: ["POST"])]
     public function createUser(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserRepository $userRepository, Apiformatter $apiFormatter, ManagerRegistry $doctrine): JsonResponse
     {
@@ -27,7 +28,7 @@ class ApiController extends AbstractController
         if ($userRepository->emailExists($data['email'])) {
             return new JsonResponse(false, 403);
         }
-        //Crear un nuevo usuario con los datos recibidos
+            // Crear un nuevo usuario con los datos recibidos
         $user = new User();
         $user->setEmail($data['email']);
         $user->setName($data['name']);
@@ -40,46 +41,43 @@ class ApiController extends AbstractController
                 $data['password']
             )
         );
-        // Guardar el nuevo usuario en la base de datos
+            // Guardar el nuevo usuario en la base de datos
         $entityManager->persist($user);
         $entityManager->flush();
 
-        // Devolver una respuesta al cliente React
+            // Devolver una respuesta al cliente React
         $userJSON = $apiFormatter->users($user);
         return new JsonResponse($userJSON, 201);
     }
 
+        // Realiza el proceso de inicio de sesion mediante una solicitud POST a /api//login
     #[Route('/login', name: 'app_api_login', methods: ['POST'])]
     public function login(Request $request, UserRepository $userRepository, UserPasswordHasherInterface $passwordEncoder, Apiformatter $apiFormatter): JsonResponse
     {
-        // Obtener los datos de la petición POST
         $data = json_decode($request->getContent(), true);
-
-        // Buscar al usuario en la base de datos por su email
         $user = $userRepository->findOneBy(['email' => $data['email']]);
 
-        // Si el usuario no existe, devolver un error de autenticación
+            // Si el usuario no existe, devolver un error de autenticación
         if (!$user) {
             return new JsonResponse(false, 402);
         }
 
-        // Verificar que la contraseña es correcta
+            // Verificar que la contraseña es correcta
         $isPasswordValid = $passwordEncoder->isPasswordValid($user, $data['password']);
         if (!$isPasswordValid) {
             return new JsonResponse(false, 401);
         }
 
-        // Devolver los datos del usuario en formato JSON
+            // Devolver los datos del usuario en formato JSON
         $userJSON = $apiFormatter->users($user);
         return new JsonResponse($userJSON, 201);
     }
 
+        // Edita los datos de un usuario mediante una solicitud POST a /api/editUser
     #[Route('/editUser', name: 'app_api_edit_user', methods: ["POST"])]
     public function editUser(Request $request, UserRepository $userRepository, Apiformatter $apiFormatter, ManagerRegistry $doctrine): JsonResponse
     {
         $entityManager = $doctrine->getManager();
-
-            // Obtener los datos de la petición POST
         $data = json_decode($request->getContent(), true);
 
             // Buscar al usuario en la base de datos por su email
@@ -89,7 +87,7 @@ class ApiController extends AbstractController
         $user->setName($data['name']);
         $user->setLastName($data['last_name']);
         $user->setPhone($data['phone']);
-        
+
             // Guardar los cambios del usuario en la base de datos
         $entityManager->flush();
 
@@ -98,6 +96,7 @@ class ApiController extends AbstractController
         return new JsonResponse($userJSON, 201);
     }
 
+        // Obtiene la lista de reservas mediante una solicitud GET a /api/bookings
     #[Route('/bookings', name: 'app_api_booking', methods: ["GET"])]
     public function usersIndex(BookingRepository $bookingRepository, Apiformatter $apiFormatter): JsonResponse
     {
@@ -111,6 +110,7 @@ class ApiController extends AbstractController
         return new JsonResponse($bookingJSON);
     }
 
+        // Obtiene los tipos de reservas mediante una solicitud GET a /api/bookingsTypes
     #[Route('/bookingsTypes', name: 'app_api_bookingTypes', methods: ["GET"])]
     public function getBookingTypes(): JsonResponse
     {
@@ -127,6 +127,7 @@ class ApiController extends AbstractController
         return new JsonResponse($tiposCitas);
     }
 
+        // Crea una nueva reserva mediante una solicitud POST a /api/newBooking
     #[Route('/newBooking', name: 'app_api_newBooking', methods: ["POST"])]
     public function createBooking(Request $request, UserRepository $userRepository, Apiformatter $apiFormatter, ManagerRegistry $doctrine): JsonResponse
     {
@@ -143,7 +144,7 @@ class ApiController extends AbstractController
 
         $time = new \DateTime($timeString);
 
-        // Verificar si se encontró el usuario
+            // Verificar si se encontró el usuario
         if (!$user) {
             return new JsonResponse("Usuario no encontrado", 404);
         }
@@ -155,18 +156,18 @@ class ApiController extends AbstractController
         $booking->setTime($time);
         $booking->setDuration($data['duration']);
 
-        // Guardar la nuevo cita en la base de datos
+            // Guardar la nuevo cita en la base de datos
         $entityManager->persist($booking);
         $entityManager->flush();
 
         return new JsonResponse("Cita registrada", 201);
     }
 
+        // Cambia el estado de una reserva a confirmada mediante una solicitud PUT a /api/booking/status/{id}
     #[Route('/booking/status/{id}', name: 'app_api_changestatus', methods: ["PUT"])]
     public function changeBookingStatus($id, BookingRepository $bookingRepository, ManagerRegistry $doctrine): JsonResponse
     {
         $entityManager = $doctrine->getManager();
-
         $booking = $bookingRepository->find($id);
 
         if (!$booking) {
@@ -174,9 +175,8 @@ class ApiController extends AbstractController
         }
 
         $booking->setStatus(2);
-
         $entityManager->flush();
-        
+
         $message = $this->renderView('email/sendemail.html.twig', [
             'booking' => $booking,
         ]);
@@ -186,11 +186,11 @@ class ApiController extends AbstractController
         return new JsonResponse(['message' => 'Estado de reserva cambiado correctamente']);
     }
 
+        // Cambia el estado de una reserva a oculta mediante una solicitud PUT a /api/booking/delete/{id}
     #[Route('/booking/delete/{id}', name: 'app_api_changeHidden', methods: ["PUT"])]
     public function changeBookingHidden($id, BookingRepository $bookingRepository, ManagerRegistry $doctrine): JsonResponse
     {
         $entityManager = $doctrine->getManager();
-
         $booking = $bookingRepository->find($id);
 
         if (!$booking) {
@@ -198,7 +198,6 @@ class ApiController extends AbstractController
         }
 
         $booking->setStatus(0);
-
         $entityManager->flush();
 
         $message = $this->renderView('email/sendemail.html.twig', [
@@ -209,6 +208,4 @@ class ApiController extends AbstractController
 
         return new JsonResponse(['message' => 'Cita cancelada correctamente']);
     }
-
-    
 }

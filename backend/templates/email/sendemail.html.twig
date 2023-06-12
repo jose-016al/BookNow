@@ -1,9 +1,14 @@
 {% if booking.status == 2 %}
     <div>
-        <h1>Cita confirmada</h1>
+        <h2 style="text-align: center;">Cita confirmada</h2>
+        <p style="text-align: center; font-size: 16px;">Tu cita sera el {{ booking.date|date('d/m/Y') }} a las {{ booking.time|date('H:i') }}</p>
+        <p style="text-align: center; font-size: 16px;">{{ booking.type|join(', ') }}</p>
+        <p style="text-align: center; font-size: 16px;">!Gracias por confiar en nosotros!</p>
     </div>
 {% elseif booking.status == 0 %}
     <div>
-        <h1>Cita cancelada</h1>
+        <h2 style="text-align: center;">Cita cancelada</h2>
+        <p style="text-align: center; font-size: 16px;">Lo sentimos parece ser que no hemos podido darte cita para el {{ booking.date|date('d-m-Y') }} a las {{ booking.time|date('H:i') }}</p>
+        <p style="text-align: center; font-size: 16px;">Pero te animamos a que vuelvas a intentarlo de nuevo</p>
     </div>
 {% endif %}

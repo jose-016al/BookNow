@@ -23,6 +23,10 @@ const GetBookingTypes = ({ bookingTypes }) => {
         }
     }
 
+    /**
+     * Genera un array con los tipos de reservas si esta duplicada la seleccion se elimina
+     * @param {Event} event la seleccion del tipo
+     */
     const handleTypesChange = (event) => {
         const selectedValue = event.target.value;
         const selectedType = types.find((type) => type.type === selectedValue);
